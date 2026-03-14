@@ -18,14 +18,14 @@ const barriosDestacados = barriosData.slice(0, 3);
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Nutrición clínica - Nutricionista Leganés",
+  "name": "Nutrición clínica - Nutricionista Getafe",
   "description": servicio.description,
   "provider": {
     "@type": "Dietitian",
-    "name": "Soraya Sánchez & José Luis Todolí"
+    "name": "Arancha Fontán, Ana Gómez, Alejandro Moraleja y Miriam"
   },
-  "areaServed": "Leganés",
-  "priceRange": "50€ - 140€"
+  "areaServed": "Getafe",
+  "priceRange": "55€ - 145€"
 };
 ---
 
@@ -44,9 +44,9 @@ const schema = {
   ]} />
 
   <Hero
-    title={`${servicio.title} en Leganés`}
+    title={`${servicio.title} en Getafe`}
     description={servicio.description}
-    location="Leganés"
+    location="Getafe"
     showVideo={true}
   />
 
@@ -86,7 +86,7 @@ const schema = {
           <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">1️⃣</div>
           <h3>Valoración clínica</h3>
           <p style="color: var(--color-text-secondary);">
-            Análisis de tu patología, analíticas y tratamiento médico actual. <strong>50€</strong>
+            Análisis de tu patología, analíticas y tratamiento médico actual. <strong>55€</strong>
           </p>
         </div>
         <div class="card" style="text-align: center;">
@@ -109,9 +109,9 @@ const schema = {
 
   <section class="section">
     <div class="container">
-      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Zonas de Leganés donde atiendo</h2>
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Zonas de Getafe donde atendemos</h2>
       <p class="text-center" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); max-width: 600px; margin-left: auto; margin-right: auto;">
-        Consulta presencial en el Clínica Podoimas, accesible desde todo Leganés.
+        Consulta presencial en Calle Zaragoza 1, accesible desde todo Getafe.
       </p>
       <div class="barrios-grid">
         {barriosDestacados.map(barrio => (
@@ -127,7 +127,6 @@ const schema = {
     relatedIds={["perdida-de-peso", "salud-digestiva"]}
   />
 
-  <!-- Calendario de reservas -->
   <CalendlySection />
 
   <CTABox

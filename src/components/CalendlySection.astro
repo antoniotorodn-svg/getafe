@@ -17,29 +17,43 @@ import CalendlyEmbed from './CalendlyEmbed.astro';
     </div>
 
     <div class="calendly-tabs" id="calendlyTabs">
-      <button class="calendly-tab calendly-tab--active" data-tab="soraya">Soraya Sánchez</button>
-      <button class="calendly-tab" data-tab="jose">José Luis Todolí</button>
+      <button class="calendly-tab calendly-tab--active" data-tab="arancha">Arancha Fontán</button>
+      <button class="calendly-tab" data-tab="ana">Ana Gómez</button>
+      <button class="calendly-tab" data-tab="alejandro">Alejandro Moraleja</button>
+      <button class="calendly-tab" data-tab="miriam">Miriam</button>
     </div>
 
     <div class="calendly-panels">
       <!-- Individual -->
-      <div class="calendly-panel calendly-panel--active" id="panel-soraya">
-        <CalendlyEmbed type="soraya" />
+      <div class="calendly-panel calendly-panel--active" id="panel-arancha">
+        <CalendlyEmbed type="arancha" />
       </div>
-      <div class="calendly-panel" id="panel-jose">
-        <CalendlyEmbed type="jose" />
+      <div class="calendly-panel" id="panel-ana">
+        <CalendlyEmbed type="ana" />
+      </div>
+      <div class="calendly-panel" id="panel-alejandro">
+        <CalendlyEmbed type="alejandro" />
+      </div>
+      <div class="calendly-panel" id="panel-miriam">
+        <CalendlyEmbed type="miriam" />
       </div>
       <!-- Parejas -->
-      <div class="calendly-panel" id="panel-soraya-parejas">
-        <CalendlyEmbed type="soraya-parejas" />
+      <div class="calendly-panel" id="panel-arancha-parejas">
+        <CalendlyEmbed type="arancha-parejas" />
       </div>
-      <div class="calendly-panel" id="panel-jose-parejas">
-        <CalendlyEmbed type="jose-parejas" />
+      <div class="calendly-panel" id="panel-ana-parejas">
+        <CalendlyEmbed type="ana-parejas" />
+      </div>
+      <div class="calendly-panel" id="panel-alejandro-parejas">
+        <CalendlyEmbed type="alejandro-parejas" />
+      </div>
+      <div class="calendly-panel" id="panel-miriam-parejas">
+        <CalendlyEmbed type="miriam-parejas" />
       </div>
     </div>
 
     <p class="text-center" style="margin-top: var(--spacing-lg); color: var(--text-light);">
-      ¿Prefieres llamar? <a href="tel:+34623998939" style="color: var(--green-dark); font-weight: 600;">623 99 89 39</a> o escríbenos por <a href="https://wa.me/34644985209" target="_blank" rel="noopener" style="color: var(--green-dark); font-weight: 600;">WhatsApp</a>
+      ¿Prefieres llamar? <a href="tel:+34655378068" style="color: var(--green-dark); font-weight: 600;">655 37 80 68</a> o escríbenos por <a href="https://wa.me/34655378068" target="_blank" rel="noopener" style="color: var(--green-dark); font-weight: 600;">WhatsApp</a>
     </p>
   </div>
 </section>
@@ -50,7 +64,7 @@ import CalendlyEmbed from './CalendlyEmbed.astro';
     const panels = document.querySelectorAll('.calendly-panel');
     const typeButtons = document.querySelectorAll('.calendly-type');
     let currentType = 'individual';
-    let currentTab = 'soraya';
+    let currentTab = 'arancha';
 
     function showPanel() {
       panels.forEach(p => p.classList.remove('calendly-panel--active'));
@@ -70,7 +84,7 @@ import CalendlyEmbed from './CalendlyEmbed.astro';
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        currentTab = tab.getAttribute('data-tab') || 'soraya';
+        currentTab = tab.getAttribute('data-tab') || 'arancha';
         tabs.forEach(t => t.classList.remove('calendly-tab--active'));
         tab.classList.add('calendly-tab--active');
         showPanel();
@@ -121,6 +135,7 @@ import CalendlyEmbed from './CalendlyEmbed.astro';
     justify-content: center;
     gap: 12px;
     margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
   }
 
   .calendly-tab {

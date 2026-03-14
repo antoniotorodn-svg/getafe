@@ -1,15 +1,19 @@
 ---
 interface Props {
-  type: 'soraya' | 'jose' | 'soraya-parejas' | 'jose-parejas';
+  type: 'arancha' | 'ana' | 'alejandro' | 'miriam' | 'arancha-parejas' | 'ana-parejas' | 'alejandro-parejas' | 'miriam-parejas';
 }
 
 const { type } = Astro.props;
 
 const urls: Record<string, string> = {
-  'soraya': 'https://calendly.com/leganes/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
-  'jose': 'https://calendly.com/joseluistodoli/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
-  'soraya-parejas': 'https://calendly.com/leganes/primera-consulta-leganes-clon?hide_event_type_details=1&hide_gdpr_banner=1',
-  'jose-parejas': 'https://calendly.com/joseluistodoli/primera-consulta-pareja?hide_event_type_details=1&hide_gdpr_banner=1',
+  'arancha': 'https://calendly.com/aranchafontannutricion/primera-consulta-getafe?hide_event_type_details=1&hide_gdpr_banner=1',
+  'ana': 'https://calendly.com/nutricionanagomez/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
+  'alejandro': 'https://calendly.com/almoranutri/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
+  'miriam': 'https://calendly.com/nutricionistaenalcala/primera-consulta-getafe?hide_event_type_details=1&hide_gdpr_banner=1',
+  'arancha-parejas': 'https://calendly.com/aranchafontannutricion/primera-consulta-pareja-getafe?hide_event_type_details=1&hide_gdpr_banner=1',
+  'ana-parejas': 'https://calendly.com/nutricionanagomez/primera-consulta-pareja?hide_event_type_details=1&hide_gdpr_banner=1',
+  'alejandro-parejas': 'https://calendly.com/almoranutri/primera-consulta-clon?hide_event_type_details=1&hide_gdpr_banner=1',
+  'miriam-parejas': 'https://calendly.com/nutricionistaenalcala/primera-consulta-2-personas-getafe?hide_event_type_details=1&hide_gdpr_banner=1',
 };
 
 const calendlyUrl = urls[type];

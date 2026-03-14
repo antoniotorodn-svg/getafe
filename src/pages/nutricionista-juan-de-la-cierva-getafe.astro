@@ -11,20 +11,20 @@ import CalendlySection from '../components/CalendlySection.astro';
 import serviciosData from '../data/servicios.json';
 import barriosData from '../data/barrios.json';
 
-const barrio = barriosData.find(b => b.slug === 'nutricionista-el-carrascal-leganes')!;
+const barrio = barriosData.find(b => b.slug === 'nutricionista-juan-de-la-cierva-getafe')!;
 const otrosBarrios = barriosData.filter(b => b.id !== barrio.id).slice(0, 6);
 
 const barrioSchema = {
   "@context": "https://schema.org",
   "@type": ["Dietitian", "LocalBusiness"],
-  "name": `Nutricionista en ${barrio.name} Leganés — nutricionistaenleganes.com`,
-  "telephone": "+34623998939",
+  "name": `Nutricionista en ${barrio.name} — nutricionista.io`,
+  "telephone": "+34655378068",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Calle Nuestra Señora de Begoña, 8",
-    "addressLocality": "Leganés",
+    "streetAddress": "Calle Zaragoza, 1",
+    "addressLocality": "Getafe",
     "addressRegion": "Madrid",
-    "postalCode": "28911",
+    "postalCode": "28901",
     "addressCountry": "ES"
   }
 };
@@ -64,7 +64,7 @@ const barrioSchema = {
     <div class="container">
       <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Servicios de nutrición en {barrio.name}</h2>
       <p class="text-center" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); max-width: 700px; margin-left: auto; margin-right: auto;">
-        Consulta presencial en la Clínica Podoimas, cerca de tu barrio.
+        Consulta presencial en la Calle Zaragoza 1, cerca de tu barrio.
       </p>
 
       <div class="grid grid--3">
@@ -81,7 +81,7 @@ const barrioSchema = {
 
   <section class="section section--alt">
     <div class="container">
-      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Otras zonas de Leganés</h2>
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Otras zonas de Getafe</h2>
       <div class="barrios-grid">
         {otrosBarrios.map(b => <BarrioTag name={b.name} href={`/${b.slug}`} />)}
       </div>
@@ -92,7 +92,7 @@ const barrioSchema = {
 
   <CTABox
     title={`¿Vives en ${barrio.name}?`}
-    description="Reserva tu primera consulta en la Clínica Podoimas."
+    description="Reserva tu primera consulta en nuestra clínica de Getafe."
     ctaText="Reservar cita"
     ctaHref="#reservar"
     variant="trust"

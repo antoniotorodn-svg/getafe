@@ -4,7 +4,7 @@ import compress from 'astro-compress';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nutricionistaenleganes.com',
+  site: 'https://nutricionista.io',
   build: {
     inlineStylesheets: 'always'
   },
