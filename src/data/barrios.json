@@ -1,0 +1,100 @@
+[
+  {
+    "id": "leganes-centro",
+    "slug": "nutricionista-leganes-centro",
+    "name": "Leganés Centro",
+    "description": "Nutricionista en el centro de Leganés, cerca de la Plaza de España, el Ayuntamiento, el Teatro José Monleón y la Iglesia de San Salvador.",
+    "landmarks": [
+      "Plaza de España",
+      "Ayuntamiento de Leganés",
+      "Teatro José Monleón",
+      "Iglesia de San Salvador"
+    ],
+    "metaTitle": "Nutricionista en Leganés Centro — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en Leganés Centro, junto al Ayuntamiento y Plaza de España. Consulta presencial y online. Reserva tu cita."
+  },
+  {
+    "id": "zarzaquemada",
+    "slug": "nutricionista-zarzaquemada-leganes",
+    "name": "Zarzaquemada",
+    "description": "Nutricionista en Zarzaquemada, uno de los barrios más poblados de Leganés con excelente acceso al Metro y cercanías.",
+    "landmarks": [
+      "Estación de Cercanías Zarzaquemada",
+      "Centro Comercial Parquesur (cercano)",
+      "Polideportivo Europa",
+      "Parque de la Hispanidad"
+    ],
+    "metaTitle": "Nutricionista en Zarzaquemada Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en Zarzaquemada (Leganés), junto a Cercanías y Parquesur. Primera consulta 50€. Reserva cita."
+  },
+  {
+    "id": "la-fortuna",
+    "slug": "nutricionista-la-fortuna-leganes",
+    "name": "La Fortuna",
+    "description": "Nutricionista en La Fortuna, barrio con acceso directo al Metro Línea 11 y ambiente dinámico y multicultural.",
+    "landmarks": [
+      "Metro La Fortuna (L11)",
+      "Centro Cultural La Fortuna",
+      "Parque de La Fortuna",
+      "CEIP La Fortuna"
+    ],
+    "metaTitle": "Nutricionista en La Fortuna Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en La Fortuna (Leganés), junto al Metro L11. Consulta presencial y online. Reserva tu cita."
+  },
+  {
+    "id": "san-nicasio",
+    "slug": "nutricionista-san-nicasio-leganes",
+    "name": "San Nicasio",
+    "description": "Nutricionista en San Nicasio, barrio emblemático de Leganés con zonas verdes, colegios y el conocido Parque de San Nicasio.",
+    "landmarks": [
+      "Parque de San Nicasio",
+      "Centro Cultural San Nicasio",
+      "Instalaciones deportivas municipales",
+      "Colegios e institutos del barrio"
+    ],
+    "metaTitle": "Nutricionista en San Nicasio Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en San Nicasio (Leganés). Consulta presencial y online. Primera consulta 50€. Reserva."
+  },
+  {
+    "id": "el-carrascal",
+    "slug": "nutricionista-el-carrascal-leganes",
+    "name": "El Carrascal",
+    "description": "Nutricionista en El Carrascal, zona residencial moderna de Leganés con viviendas nuevas, parques y acceso rápido a la M-45.",
+    "landmarks": [
+      "Zona residencial de nueva construcción",
+      "Parques y zonas ajardinadas",
+      "Acceso rápido a M-45 y M-406",
+      "Centros educativos del barrio"
+    ],
+    "metaTitle": "Nutricionista en El Carrascal Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en El Carrascal (Leganés), zona residencial moderna. Consulta presencial y online. Reserva tu cita."
+  },
+  {
+    "id": "arroyo-culebro",
+    "slug": "nutricionista-arroyo-culebro-leganes",
+    "name": "Arroyo Culebro",
+    "description": "Nutricionista en Arroyo Culebro, zona de Leganés cercana al parque lineal del Arroyo Culebro, ideal para familias y deportistas.",
+    "landmarks": [
+      "Parque Lineal del Arroyo Culebro",
+      "Polideportivo Municipal",
+      "Zonas verdes y senderos",
+      "Acceso a M-45"
+    ],
+    "metaTitle": "Nutricionista en Arroyo Culebro Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en Arroyo Culebro (Leganés), cerca del parque lineal. Consulta presencial y online. Primera consulta 50€."
+  },
+  {
+    "id": "vereda-de-los-estudiantes",
+    "slug": "nutricionista-vereda-estudiantes-leganes",
+    "name": "Vereda de los Estudiantes",
+    "description": "Nutricionista en Vereda de los Estudiantes, zona universitaria de Leganés con el campus de la Universidad Carlos III.",
+    "landmarks": [
+      "Universidad Carlos III de Madrid",
+      "Estación de Cercanías Leganés Central",
+      "Zona de residencias universitarias",
+      "Parques y zonas deportivas"
+    ],
+    "metaTitle": "Nutricionista en Vereda de los Estudiantes Leganés — nutricionistaenleganes.com",
+    "metaDescription": "Nutricionista en Vereda de los Estudiantes (Leganés), junto a la UC3M. Consulta presencial. Reserva cita."
+  }
+]

@@ -1,0 +1,109 @@
+---
+interface Props {
+  emoji: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+const { emoji, title, description, href } = Astro.props;
+---
+
+<a href={href} class="servicio-item">
+  <span class="servicio-icon">{emoji}</span>
+  <div>
+    <h3 class="servicio-title">{title}</h3>
+    <p class="servicio-desc">{description}</p>
+    <span class="servicio-link">
+      Saber más
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"/>
+        <path d="m12 5 7 7-7 7"/>
+      </svg>
+    </span>
+  </div>
+</a>
+
+<style>
+  .servicio-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 24px 20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-base);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .servicio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+  }
+
+  .servicio-icon {
+    font-size: 1.3em;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .servicio-title {
+    font-family: var(--font-display);
+    font-size: 0.95em;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .servicio-desc {
+    font-size: 0.85em;
+    color: var(--text-light);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .servicio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 0.85em;
+    font-family: var(--font-body);
+    transition: color 0.2s;
+  }
+
+  .servicio-link svg {
+    transition: transform var(--transition-base);
+  }
+
+  .servicio-item:hover .servicio-link {
+    color: var(--gold);
+  }
+
+  .servicio-item:hover .servicio-link svg {
+    transform: translateX(4px);
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .servicio-item {
+      padding: 16px 14px;
+    }
+
+    .servicio-icon {
+      font-size: 1.1em;
+    }
+
+    .servicio-title {
+      font-size: 0.88em;
+    }
+
+    .servicio-desc {
+      font-size: 0.8em;
+    }
+  }
+</style>

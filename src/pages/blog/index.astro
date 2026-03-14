@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="Blog de Nutrición | nutricionistaenleganes.com · Nutricionista en Leganés"
+  description="Artículos sobre nutrición, alimentación saludable, pérdida de peso, nutrición deportiva y más. Consejos de tus nutricionistas en Leganés."
+  canonical="/blog"
+>
+  <Nav slot="nav" />
+
+  <section class="blog-listing">
+    <div class="container">
+      <div class="blog-listing__header">
+        <h1 class="blog-listing__title">Blog de Nutrición</h1>
+        <p class="blog-listing__sub">Consejos, guías y artículos sobre alimentación saludable por tu nutricionista en Leganés.</p>
+      </div>
+
+      <div class="blog-listing__grid">
+        {posts.map((post) => {
+          const formattedDate = new Date(post.data.date).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          return (
+            <a href={`/blog/${post.id}`} class="blog-card">
+              <div class="blog-card__content">
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="blog-card__tags">
+                    {post.data.tags.slice(0, 2).map((tag: string) => (
+                      <span class="blog-card__tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <h2 class="blog-card__title">{post.data.title}</h2>
+                <p class="blog-card__desc">{post.data.description}</p>
+                <time class="blog-card__date" datetime={post.data.date}>{formattedDate}</time>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .blog-listing {
+    padding: 48px 0 64px;
+    background: var(--cream);
+  }
+
+  .blog-listing__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .blog-listing__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+
+  .blog-listing__sub {
+    font-size: 1rem;
+    color: var(--text-light);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .blog-listing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .blog-listing__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-listing__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .blog-card {
+    display: block;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    border-color: var(--sand-dark);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .blog-card__tag {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--green-pale);
+    color: var(--green-dark);
+  }
+
+  .blog-card__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .blog-card__desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card__date {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .blog-listing {
+      padding: 32px 0 40px;
+    }
+
+    .blog-listing__title {
+      font-size: 1.7rem;
+    }
+
+    .blog-card__title {
+      font-size: 1.05rem;
+    }
+  }
+</style>

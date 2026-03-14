@@ -1,0 +1,833 @@
+/* ========================================
+   NUTRICIONISTAENLEGANES.COM - Estilos Globales
+   Estética MENTARIS: DM Serif Display + DM Sans
+   Paleta cálida: crema, arena, verde, dorado
+   ======================================== */
+
+/* ===== MENTARIS VARIABLES ===== */
+:root {
+  /* Paleta Mentaris (cálida: arena + crema + verde + dorado) */
+  --sand: #F5F0EB;
+  --sand-dark: #EBE3D9;
+  --cream: #FDF8F3;
+  --green: #7CB69D;
+  --green-dark: #4A8B6F;
+  --green-pale: #EEF6F1;
+  --gold: #9A7A1C;
+  --gold-light: #F9E8D2;
+  --text: #2D2D2D;
+  --text-light: #6B6B6B;
+  --white: #FFFFFF;
+  --radius: 20px;
+
+  /* Aliases de sistema */
+  --mentaris-green: #7CB69D;
+  --mentaris-green-dark: #4A8B6F;
+  --mentaris-green-light: #EEF6F1;
+  --mentaris-cream: #F9E8D2;
+  --mentaris-bg: #FDF8F3;
+  --mentaris-text: #2D2D2D;
+  --mentaris-text-light: #6B6B6B;
+  --mentaris-white: #FFFFFF;
+  --mentaris-border: #EBE3D9;
+  --mentaris-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  --mentaris-shadow-hover: 0 8px 30px rgba(74, 139, 111, 0.12);
+  --mentaris-radius: 20px;
+  --mentaris-radius-sm: 14px;
+
+  /* Colores del sistema */
+  --color-white: #FFFFFF;
+  --color-bg: #FDF8F3;
+  --color-bg-secondary: #F5F0EB;
+  --color-accent: #F9E8D2;
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #6B6B6B;
+  --color-trust: #4A8B6F;
+
+  /* Tipografía Mentaris */
+  --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.1);
+  --shadow-green: 0 8px 30px rgba(74, 139, 111, 0.15);
+
+  /* Radios */
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--cream);
+  line-height: 1.75;
+  font-size: 16px;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+/* ========================================
+   Tipografía - Estilo Mentaris
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: var(--spacing-md);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  color: var(--text);
+  margin-bottom: var(--spacing-sm);
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+p {
+  margin-bottom: 1.2rem;
+  color: var(--text-light);
+  line-height: 1.75;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--green-dark);
+}
+
+strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ========================================
+   Layout Utilities
+   ======================================== */
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+.section {
+  padding: 64px 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 32px 0;
+  }
+}
+
+.section--alt {
+  background-color: var(--sand);
+}
+
+.section--gradient {
+  background: linear-gradient(180deg, var(--sand) 0%, var(--cream) 100%);
+}
+
+/* ========================================
+   Section headers (estilo Mentaris)
+   ======================================== */
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.6em;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95em;
+  margin-bottom: 40px;
+}
+
+/* ========================================
+   Buttons (estilo Mentaris cálido)
+   ======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary {
+  background: var(--gold);
+  color: var(--white) !important;
+  box-shadow: 0 2px 8px rgba(154, 122, 28, 0.2);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(154, 122, 28, 0.3);
+  text-decoration: none;
+  background: #7A6216;
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+
+.btn--secondary:hover {
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn--trust {
+  background: var(--green-dark);
+  color: var(--white) !important;
+  box-shadow: 0 2px 8px rgba(74, 139, 111, 0.2);
+}
+
+.btn--trust:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74, 139, 111, 0.3);
+  text-decoration: none;
+  background: #3D7A5E;
+}
+
+.btn--whatsapp {
+  background-color: #25D366;
+  color: var(--white) !important;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+}
+
+.btn--whatsapp:hover {
+  background-color: #1fb855;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+  text-decoration: none;
+  color: var(--white) !important;
+}
+
+/* ========================================
+   Grid System
+   ======================================== */
+
+.grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.grid--2,
+.grid--3,
+.grid--4 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================================
+   Cards (estilo Mentaris cálido)
+   ======================================== */
+
+.card {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   Badges & Tags (estilo Mentaris)
+   ======================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.5rem 1rem;
+  background-color: var(--gold-light);
+  color: var(--text);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  min-height: 36px;
+  background-color: var(--gold-light);
+  color: var(--text);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+  border: 2px solid var(--gold-light);
+}
+
+.tag:hover {
+  background-color: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(154, 122, 28, 0.2);
+}
+
+@media (max-width: 768px) {
+  .tag {
+    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* ========================================
+   Proof Bar
+   ======================================== */
+
+.proof-bar {
+  background: var(--gold-light);
+  text-align: center;
+  padding: 18px 24px;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.proof-stars {
+  color: var(--gold);
+  margin-right: 8px;
+}
+
+/* ========================================
+   Mobile Bottom Bar
+   ======================================== */
+
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background: var(--white);
+  border-top: 1px solid var(--sand-dark);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 16px;
+}
+
+.mobile-bottom-bar .bottom-nav-inner {
+  display: flex;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.mobile-bottom-bar .bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  font-size: 0.92em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.mobile-bottom-bar .bottom-nav-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.mobile-bottom-bar .bn-call {
+  background: #3B7359;
+  color: var(--white);
+}
+
+.mobile-bottom-bar .bn-call svg {
+  fill: var(--white);
+}
+
+.mobile-bottom-bar .bn-wa {
+  background: #1A8042;
+  color: var(--white);
+}
+
+.mobile-bottom-bar .bn-wa svg {
+  fill: var(--white);
+}
+
+.mobile-bottom-bar .bn-reserva {
+  background: #946B1D;
+  color: var(--white);
+}
+
+.mobile-bottom-bar .bn-reserva svg {
+  fill: var(--white);
+}
+
+@media (max-width: 900px) {
+  .mobile-bottom-bar {
+    display: block;
+  }
+
+  body {
+    padding-bottom: 66px;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-bottom-bar {
+    display: none;
+  }
+}
+
+/* ========================================
+   Floating Buttons (desktop)
+   ======================================== */
+
+.floating-btns {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+
+.float-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.float-btn:hover {
+  transform: scale(1.1);
+}
+
+.float-wa {
+  background: #1A8042;
+}
+
+.float-reserva {
+  background: #946B1D;
+}
+
+.float-btn svg {
+  width: 26px;
+  height: 26px;
+  fill: var(--white);
+}
+
+@media (max-width: 900px) {
+  .floating-btns {
+    display: none;
+  }
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-accent {
+  color: var(--gold);
+}
+
+.text-trust {
+  color: var(--green-dark);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+:focus-visible {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   MENTARIS HIGHLIGHT BOX
+   ========================================== */
+
+.mentaris-highlight {
+  background: var(--sand);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border: 1px solid var(--sand-dark);
+}
+
+.mentaris-highlight p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   MENTARIS TIP BOX
+   ========================================== */
+
+.mentaris-tip {
+  background: var(--sand);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--sand-dark);
+}
+
+.mentaris-tip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--green-dark);
+}
+
+.mentaris-tip-title {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  font-family: var(--font-body);
+}
+
+.mentaris-tip p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   MENTARIS CTA BLOCK
+   ========================================== */
+
+.mentaris-cta {
+  background: var(--sand);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  margin: 3rem 0 1rem;
+  text-align: center;
+  border: 1px solid var(--sand-dark);
+}
+
+.mentaris-cta h3 {
+  color: var(--text);
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.mentaris-cta p {
+  color: var(--text-light);
+  font-size: 16px;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========================================
+   Responsive Typography
+   ======================================== */
+
+@media (max-width: 767px) {
+  body {
+    font-size: 17px;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+
+/* ========================================
+   Scroll Reveal Animations
+   ======================================== */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   About Grid (index page)
+   ======================================== */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.about-image-placeholder {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  background: var(--sand);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  margin: 0 auto;
+  border: 3px solid var(--gold-light);
+}
+
+/* ========================================
+   Barrios Grid
+   ======================================== */
+
+.barrios-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+/* ========================================
+   Mobile responsive adjustments
+   ======================================== */
+
+@media (max-width: 900px) {
+  .section-title {
+    font-size: 1.5em;
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 0.95em;
+    margin-bottom: 24px;
+  }
+
+  .proof-bar {
+    font-size: 0.92em;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .section-title {
+    font-size: 1.35em;
+  }
+
+  .section-sub {
+    font-size: 0.9em;
+  }
+}

@@ -1,0 +1,138 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq-list">
+  {items.map((item) => (
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>{item.question}</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        {item.answer}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--sand-dark);
+  }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.92em;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: var(--text);
+    font-family: var(--font-body);
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .faq-q:hover {
+    background: var(--sand);
+  }
+
+  .faq-icon {
+    font-size: 1.3em;
+    color: var(--text-light);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .faq-a {
+    padding: 0 24px 0;
+    font-size: 0.9em;
+    color: var(--text-light);
+    line-height: 1.65;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s;
+  }
+
+  /* Open state */
+  .faq-item.open .faq-q {
+    background: var(--cream);
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 500px;
+    padding: 0 24px 18px;
+    color: var(--text);
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .faq-q {
+      padding: 14px 16px;
+      font-size: 0.85em;
+    }
+
+    .faq-a {
+      font-size: 0.82em;
+    }
+
+    .faq-item.open .faq-a {
+      padding: 0 16px 14px;
+    }
+
+    .faq-icon {
+      font-size: 1.1em;
+    }
+  }
+</style>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const button = item.querySelector('.faq-q');
+    if (button) {
+      button.addEventListener('click', () => {
+        // Close other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('open');
+          }
+        });
+        // Toggle current
+        item.classList.toggle('open');
+      });
+    }
+  });
+</script>

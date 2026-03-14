@@ -1,0 +1,160 @@
+---
+// Nav estilo Mentaris - crema con blur, hamburger en móvil
+---
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-name">NUTRICIONISTA LEGANÉS</span>
+    </a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="/#servicios" class="nav__link">Servicios</a></li>
+      <li><a href="/#proceso" class="nav__link">Proceso</a></li>
+      <li><a href="/#precios" class="nav__link">Precios</a></li>
+      <li><a href="/blog" class="nav__link">Blog</a></li>
+      <li>
+        <a href="tel:+34623998939" class="nav__link nav__link--phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          623 99 89 39
+        </a>
+      </li>
+    </ul>
+    <button class="nav__hamburger" id="navHamburger" aria-label="Abrir menu de navegacion">&#9776;</button>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('nav__links--open');
+    });
+  }
+</script>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 40px;
+    background: rgba(253, 248, 243, 0.92);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .nav__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .nav__logo {
+    text-decoration: none;
+  }
+
+  .nav__logo:hover {
+    text-decoration: none;
+  }
+
+  .nav__logo-name {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    font-family: var(--font-body);
+    font-size: 0.88em;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav__link:hover {
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  .nav__link--phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .nav__hamburger {
+    display: none;
+    background: none;
+    border: 2px solid var(--sand-dark);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+    color: var(--text);
+  }
+
+  .nav__links--open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    padding: 20px 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--sand-dark);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    z-index: 200;
+  }
+
+  @media (max-width: 900px) {
+    .nav {
+      padding: 10px 16px;
+    }
+
+    .nav__logo-name {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .nav__links {
+      display: none;
+    }
+
+    .nav__hamburger {
+      display: block;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav__logo-name {
+      font-size: 0.6875rem;
+    }
+  }
+</style>

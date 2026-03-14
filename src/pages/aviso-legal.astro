@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Aviso Legal | nutricionistaenleganes.com · Nutricionista Leganés"
+  description="Aviso legal y condiciones de uso del sitio web nutricionistaenleganes.com. Soraya Sánchez y José Luis Todolí, nutricionistas en Leganés."
+  canonical="/aviso-legal"
+>
+  <Nav slot="nav" />
+
+  <section class="section">
+    <div class="container legal-page">
+      <h1>Aviso Legal</h1>
+      <p class="legal-page__updated">Última actualización: febrero 2026</p>
+
+      <h2>1. Datos identificativos</h2>
+      <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:</p>
+      <ul class="legal-list">
+        <li><strong>Titular:</strong> nutricionistaenleganes.com (Soraya Sánchez y José Luis Todolí)</li>
+        <li><strong>NIF/CIF:</strong> [NIF/CIF pendiente de incluir]</li>
+        <li><strong>Domicilio profesional:</strong> Calle Ntra. Sra. de Begoña 8, Clínica Podoimas, 28911 Leganés, Madrid</li>
+        <li><strong>Email:</strong> info@nutricionistaenleganes.com</li>
+        <li><strong>Teléfono:</strong> 623 99 89 39</li>
+        <li><strong>WhatsApp:</strong> 644 98 52 09</li>
+        <li><strong>Actividad:</strong> Dietistas-Nutricionistas</li>
+        <li><strong>Sitio web:</strong> nutricionistaenleganes.com</li>
+      </ul>
+
+      <h2>2. Objeto</h2>
+      <p>El presente aviso legal regula el uso y las condiciones de acceso al sitio web <strong>nutricionistaenleganes.com</strong>, propiedad de nutricionistaenleganes.com. El acceso a este sitio web implica la aceptación expresa de las presentes condiciones.</p>
+
+      <h2>3. Propiedad intelectual e industrial</h2>
+      <p>Todos los contenidos del sitio web (textos, imágenes, diseño gráfico, logotipos, código fuente, etc.) son propiedad de nutricionistaenleganes.com o se usan con la debida autorización, y están protegidos por las leyes de propiedad intelectual e industrial.</p>
+      <p>Queda prohibida la reproducción total o parcial de los contenidos sin autorización expresa y por escrito de los titulares.</p>
+
+      <h2>4. Condiciones de uso</h2>
+      <p>El usuario se compromete a:</p>
+      <ul class="legal-list">
+        <li>Hacer un uso correcto y lícito del sitio web.</li>
+        <li>No realizar actividades que puedan dañar, inutilizar o sobrecargar el sitio.</li>
+        <li>No utilizar los contenidos con fines comerciales sin autorización.</li>
+        <li>No introducir virus o programas que puedan dañar el sitio web.</li>
+      </ul>
+
+      <h2>5. Exclusión de responsabilidad</h2>
+      <p>nutricionistaenleganes.com no se hace responsable de:</p>
+      <ul class="legal-list">
+        <li>Los posibles daños derivados de interferencias, omisiones, desconexiones o virus informáticos.</li>
+        <li>Los contenidos de sitios web de terceros a los que se pueda acceder mediante enlaces desde este sitio.</li>
+        <li>La falta de disponibilidad del sitio web por causas de fuerza mayor o mantenimiento.</li>
+      </ul>
+      <p>La información proporcionada en este sitio web tiene carácter informativo y no sustituye en ningún caso una consulta profesional individualizada.</p>
+
+      <h2>6. Política de enlaces</h2>
+      <p>Este sitio web puede contener enlaces a sitios de terceros. nutricionistaenleganes.com no se responsabiliza del contenido, políticas de privacidad o prácticas de dichos sitios. El acceso a estos enlaces es responsabilidad del usuario.</p>
+
+      <h2>7. Legislación aplicable y jurisdicción</h2>
+      <p>Las presentes condiciones se rigen por la legislación española. Para cualquier controversia derivada del uso de este sitio web, las partes se someten a los Juzgados y Tribunales de Madrid, salvo que la normativa aplicable establezca un fuero diferente.</p>
+
+      <h2>8. Modificaciones</h2>
+      <p>nutricionistaenleganes.com se reserva el derecho de modificar el presente aviso legal en cualquier momento. Las modificaciones serán publicadas en esta página con la fecha de última actualización.</p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    max-width: 800px;
+  }
+
+  .legal-page h1 {
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .legal-page__updated {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--mentaris-border);
+  }
+
+  .legal-page h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--mentaris-green-dark);
+  }
+
+  .legal-page p {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .legal-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .legal-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .legal-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--mentaris-green);
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ctaText?: string;
+  ctaHref?: string;
+  variant?: 'primary' | 'trust' | 'whatsapp';
+}
+
+const {
+  title,
+  description,
+  ctaText = "Reservar cita",
+  ctaHref = "#reservar",
+  variant = "primary"
+} = Astro.props;
+
+// Map variant to button class
+const btnClass = variant === 'whatsapp' ? 'cta-card__btn--wa' : 'cta-card__btn--white';
+---
+
+<div class="cta-final">
+  <div class="container">
+    <div class="cta-card">
+      <h2 class="cta-card__title">{title}</h2>
+      <p class="cta-card__desc">{description}</p>
+      <a href={ctaHref} class={`cta-card__btn ${btnClass}`}>
+        {ctaText}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cta-final {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .cta-card {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    border-radius: var(--radius);
+    padding: 48px 40px;
+    text-align: center;
+    color: var(--white);
+  }
+
+  .cta-card__title {
+    font-family: var(--font-display);
+    font-size: 1.7em;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .cta-card__desc {
+    font-size: 0.95em;
+    opacity: 0.9;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .cta-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 30px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.92em;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .cta-card__btn--white {
+    background: var(--white);
+    color: var(--green-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-card__btn--white:hover {
+    background: var(--sand);
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+
+  .cta-card__btn--wa {
+    background: #25D366;
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+  }
+
+  .cta-card__btn--wa:hover {
+    background: #1fb855;
+    transform: translateY(-2px);
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .cta-final {
+      padding: 0 16px 32px;
+    }
+
+    .cta-card {
+      padding: 28px 20px;
+    }
+
+    .cta-card__title {
+      font-size: 1.2em;
+    }
+
+    .cta-card__desc {
+      font-size: 0.85em;
+    }
+
+    .cta-card__btn {
+      padding: 12px 24px;
+      font-size: 0.85em;
+    }
+  }
+</style>

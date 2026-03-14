@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTABox from '../components/CTABox.astro';
+import BarrioTag from '../components/BarrioTag.astro';
+import CalendlySection from '../components/CalendlySection.astro';
+
+import serviciosData from '../data/servicios.json';
+import barriosData from '../data/barrios.json';
+
+const barrio = barriosData.find(b => b.slug === 'nutricionista-el-carrascal-leganes')!;
+const otrosBarrios = barriosData.filter(b => b.id !== barrio.id).slice(0, 6);
+
+const barrioSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Dietitian", "LocalBusiness"],
+  "name": `Nutricionista en ${barrio.name} Leganés — nutricionistaenleganes.com`,
+  "telephone": "+34623998939",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Nuestra Señora de Begoña, 8",
+    "addressLocality": "Leganés",
+    "addressRegion": "Madrid",
+    "postalCode": "28911",
+    "addressCountry": "ES"
+  }
+};
+---
+
+<BaseLayout
+  title={barrio.metaTitle}
+  description={barrio.metaDescription}
+  canonical={`/${barrio.slug}`}
+  schema={barrioSchema}
+>
+  <Nav slot="nav" />
+
+  <Hero
+    title={`Nutricionista en ${barrio.name}`}
+    description={barrio.description}
+    location={barrio.name}
+    showVideo={true}
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="card">
+          <h2 style="margin-bottom: var(--spacing-md);">Puntos de referencia</h2>
+          <ul class="landmarks-list">
+            {barrio.landmarks.map(landmark => (
+              <li>📍 {landmark}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Servicios de nutrición en {barrio.name}</h2>
+      <p class="text-center" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); max-width: 700px; margin-left: auto; margin-right: auto;">
+        Consulta presencial en la Clínica Podoimas, cerca de tu barrio.
+      </p>
+
+      <div class="grid grid--3">
+        {serviciosData.slice(0, 3).map(servicio => (
+          <ServiceCard emoji={servicio.emoji} title={servicio.title} description={servicio.shortDesc} href={`/${servicio.slug}`} />
+        ))}
+      </div>
+
+      <div class="text-center" style="margin-top: var(--spacing-xl);">
+        <a href="/#servicios" class="btn btn--secondary">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Otras zonas de Leganés</h2>
+      <div class="barrios-grid">
+        {otrosBarrios.map(b => <BarrioTag name={b.name} href={`/${b.slug}`} />)}
+      </div>
+    </div>
+  </section>
+
+  <CalendlySection />
+
+  <CTABox
+    title={`¿Vives en ${barrio.name}?`}
+    description="Reserva tu primera consulta en la Clínica Podoimas."
+    ctaText="Reservar cita"
+    ctaHref="#reservar"
+    variant="trust"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .landmarks-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+  .landmarks-list li { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .barrios-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-sm); }
+</style>

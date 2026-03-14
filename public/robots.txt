@@ -1,0 +1,6 @@
+# nutricionistaenleganes.com robots.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://nutricionistaenleganes.com/sitemap.xml

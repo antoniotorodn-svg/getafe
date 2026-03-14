@@ -1,0 +1,35 @@
+---
+import ServiceCard from './ServiceCard.astro';
+
+interface Props {
+  currentServiceId: string;
+  relatedIds: string[];
+}
+
+const { currentServiceId, relatedIds } = Astro.props;
+
+import serviciosData from '../data/servicios.json';
+
+const relatedServices = serviciosData.filter(s =>
+  relatedIds.includes(s.id) && s.id !== currentServiceId
+);
+---
+
+{relatedServices.length > 0 && (
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">Servicios relacionados</h2>
+
+      <div class={`grid grid--${relatedServices.length === 1 ? '2' : '3'}`} style="max-width: 900px; margin: 0 auto;">
+        {relatedServices.map(servicio => (
+          <ServiceCard
+            emoji={servicio.emoji}
+            title={servicio.title}
+            description={servicio.shortDesc}
+            href={`/${servicio.slug}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

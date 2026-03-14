@@ -1,0 +1,104 @@
+---
+interface Props {
+  videoId: string;
+  title?: string;
+}
+
+const { videoId, title = 'Video de presentación' } = Astro.props;
+const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`;
+---
+
+<div class="video-facade" data-video-id={videoId}>
+  <div class="video-facade__thumbnail">
+    <img src={thumbnailUrl} alt={title} loading="lazy" />
+    <button class="video-facade__play" aria-label="Reproducir video">
+      <svg width="68" height="48" viewBox="0 0 68 48" fill="none">
+        <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/>
+        <path d="M45 24L27 14v20" fill="white"/>
+      </svg>
+    </button>
+  </div>
+  <div class="video-facade__player" style="display: none;"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const facades = document.querySelectorAll('.video-facade');
+
+    facades.forEach((facade) => {
+      const button = facade.querySelector('.video-facade__play');
+      const thumbnail = facade.querySelector('.video-facade__thumbnail');
+      const playerContainer = facade.querySelector('.video-facade__player');
+      const videoId = facade.getAttribute('data-video-id');
+
+      button?.addEventListener('click', () => {
+        if (thumbnail && playerContainer && videoId) {
+          // Ocultar thumbnail
+          thumbnail.style.display = 'none';
+          playerContainer.style.display = 'block';
+
+          // Crear iframe de Vimeo
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`;
+          iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+          iframe.allowFullscreen = true;
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = 'none';
+
+          playerContainer.appendChild(iframe);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .video-facade {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-color: #000;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .video-facade__thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .video-facade__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-facade__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .video-facade__play:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-facade__player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,232 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+}
+
+const { title, description, date } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": date,
+  "author": {
+    "@type": "Person",
+    "name": "Equipo nutricionistaenleganes.com",
+    "jobTitle": "Dietistas-Nutricionistas",
+    "url": "https://nutricionistaenleganes.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "nutricionistaenleganes.com — Nutricionistas en Leganés",
+    "url": "https://nutricionistaenleganes.com"
+  }
+};
+---
+
+<BaseLayout title={`${title} | Nutricionista Leganés`} description={description} schema={articleSchema}>
+  <Nav slot="nav" />
+
+  <article class="blog-post">
+    <div class="container blog-post__container">
+      <div class="blog-post__header">
+        <a href="/blog" class="blog-post__back">&larr; Volver al blog</a>
+        <h1 class="blog-post__title">{title}</h1>
+        <time class="blog-post__date" datetime={date}>{formattedDate}</time>
+      </div>
+
+      <div class="blog-post__content">
+        <slot />
+      </div>
+
+      <div class="blog-post__cta">
+        <h3>Reserva tu consulta de nutrición</h3>
+        <p>Si necesitas ayuda profesional con tu alimentación, estamos aquí para ayudarte. Consulta presencial en Leganés u online.</p>
+        <div class="blog-post__cta-btns">
+          <a href="/#reservar" class="btn btn--primary">Reservar cita</a>
+          <a href="https://wa.me/34644985209" class="btn btn--whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .blog-post {
+    padding: 40px 0 64px;
+    background: var(--cream);
+  }
+
+  .blog-post__container {
+    max-width: 760px;
+  }
+
+  .blog-post__back {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    text-decoration: none;
+    margin-bottom: 24px;
+  }
+
+  .blog-post__back:hover {
+    text-decoration: underline;
+  }
+
+  .blog-post__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .blog-post__date {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--sand-dark);
+  }
+
+  .blog-post__content {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  .blog-post__content :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-post__content :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-post__content :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .blog-post__content :global(ul),
+  .blog-post__content :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .blog-post__content :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .blog-post__content :global(a) {
+    color: var(--green-dark);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .blog-post__content :global(a:hover) {
+    color: var(--text);
+  }
+
+  .blog-post__content :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .blog-post__content :global(blockquote) {
+    border-left: 4px solid var(--green);
+    background: var(--sand);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 12px 12px 0;
+  }
+
+  .blog-post__content :global(blockquote p) {
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  .blog-post__cta {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--sand);
+    border-radius: var(--radius);
+    text-align: center;
+    border: 1px solid var(--sand-dark);
+  }
+
+  .blog-post__cta h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .blog-post__cta p {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog-post__cta-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 24px 0 40px;
+    }
+
+    .blog-post__title {
+      font-size: 1.6rem;
+    }
+
+    .blog-post__content :global(h2) {
+      font-size: 1.3rem;
+    }
+
+    .blog-post__content :global(h3) {
+      font-size: 1.1rem;
+    }
+  }
+</style>

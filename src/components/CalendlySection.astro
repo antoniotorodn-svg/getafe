@@ -1,0 +1,168 @@
+---
+import CalendlyEmbed from './CalendlyEmbed.astro';
+---
+
+<section class="section" id="reservar">
+  <div class="container">
+    <div class="calendly-header">
+      <h2 class="section-title">Reserva tu cita</h2>
+      <p class="section-sub">
+        Elige tu nutricionista y selecciona el día y hora que mejor te convenga.
+      </p>
+    </div>
+
+    <div class="calendly-type-toggle" id="calendlyType">
+      <button class="calendly-type calendly-type--active" data-type="individual">Individual</button>
+      <button class="calendly-type" data-type="parejas">Parejas</button>
+    </div>
+
+    <div class="calendly-tabs" id="calendlyTabs">
+      <button class="calendly-tab calendly-tab--active" data-tab="soraya">Soraya Sánchez</button>
+      <button class="calendly-tab" data-tab="jose">José Luis Todolí</button>
+    </div>
+
+    <div class="calendly-panels">
+      <!-- Individual -->
+      <div class="calendly-panel calendly-panel--active" id="panel-soraya">
+        <CalendlyEmbed type="soraya" />
+      </div>
+      <div class="calendly-panel" id="panel-jose">
+        <CalendlyEmbed type="jose" />
+      </div>
+      <!-- Parejas -->
+      <div class="calendly-panel" id="panel-soraya-parejas">
+        <CalendlyEmbed type="soraya-parejas" />
+      </div>
+      <div class="calendly-panel" id="panel-jose-parejas">
+        <CalendlyEmbed type="jose-parejas" />
+      </div>
+    </div>
+
+    <p class="text-center" style="margin-top: var(--spacing-lg); color: var(--text-light);">
+      ¿Prefieres llamar? <a href="tel:+34623998939" style="color: var(--green-dark); font-weight: 600;">623 99 89 39</a> o escríbenos por <a href="https://wa.me/34644985209" target="_blank" rel="noopener" style="color: var(--green-dark); font-weight: 600;">WhatsApp</a>
+    </p>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.calendly-tab');
+    const panels = document.querySelectorAll('.calendly-panel');
+    const typeButtons = document.querySelectorAll('.calendly-type');
+    let currentType = 'individual';
+    let currentTab = 'soraya';
+
+    function showPanel() {
+      panels.forEach(p => p.classList.remove('calendly-panel--active'));
+      const suffix = currentType === 'parejas' ? '-parejas' : '';
+      const panel = document.getElementById(`panel-${currentTab}${suffix}`);
+      if (panel) panel.classList.add('calendly-panel--active');
+    }
+
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentType = btn.getAttribute('data-type') || 'individual';
+        typeButtons.forEach(b => b.classList.remove('calendly-type--active'));
+        btn.classList.add('calendly-type--active');
+        showPanel();
+      });
+    });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        currentTab = tab.getAttribute('data-tab') || 'soraya';
+        tabs.forEach(t => t.classList.remove('calendly-tab--active'));
+        tab.classList.add('calendly-tab--active');
+        showPanel();
+      });
+    });
+  });
+</script>
+
+<style>
+  .calendly-header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .calendly-type-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 16px;
+    background: var(--sand);
+    border-radius: var(--radius-full);
+    padding: 4px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .calendly-type {
+    padding: 8px 24px;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-light);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .calendly-type--active {
+    background: var(--white);
+    color: var(--text);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .calendly-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .calendly-tab {
+    padding: 12px 32px;
+    border: 2px solid var(--sand-dark);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .calendly-tab:hover {
+    border-color: var(--green-dark);
+    color: var(--green-dark);
+  }
+
+  .calendly-tab--active {
+    background: var(--green-dark);
+    color: var(--white);
+    border-color: var(--green-dark);
+  }
+
+  .calendly-tab--active:hover {
+    color: var(--white);
+  }
+
+  .calendly-panel {
+    display: none;
+  }
+
+  .calendly-panel--active {
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+    .calendly-tab {
+      padding: 10px 20px;
+      font-size: 0.88rem;
+    }
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+interface Props {
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  highlighted?: boolean;
+  savings?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  title,
+  price,
+  description,
+  features,
+  highlighted = false,
+  savings,
+  ctaText = "PEDIR CITA",
+  ctaHref = "#reservar"
+} = Astro.props;
+---
+
+<div class={`pricing-card ${highlighted ? 'pricing-card--highlighted' : ''}`}>
+  <h3 class="pricing-card__title">{title}</h3>
+  <span class="pricing-card__description">{description}</span>
+
+  {savings && (
+    <span class="pricing-card__savings">
+      (Ahorro de {savings})
+    </span>
+  )}
+
+  <div class="pricing-card__price">{price}</div>
+
+  <ul class="pricing-card__features">
+    {features.map(feature => (
+      <li>{feature}</li>
+    ))}
+  </ul>
+
+  <a href={ctaHref} class={`pricing-card__cta ${highlighted ? 'cta-gold' : 'cta-outline'}`}>
+    {ctaText}
+  </a>
+
+  <div class="pricing-card__note">
+    {highlighted ? '\u2705 Mayor compromiso, mejores resultados' : '\u2705 Empieza hoy, sin necesidad de bonos'}
+  </div>
+</div>
+
+<style>
+  .pricing-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .pricing-card--highlighted {
+    border: 2px solid var(--gold);
+  }
+
+  .pricing-card__title {
+    font-family: var(--font-body);
+    font-size: 1.05em;
+    font-weight: 600;
+    margin-bottom: 0;
+    color: var(--text);
+  }
+
+  .pricing-card__description {
+    font-size: 0.88em;
+    color: var(--text-light);
+  }
+
+  .pricing-card__savings {
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .pricing-card__price {
+    font-family: var(--font-display);
+    font-size: 2.8em;
+    color: var(--text);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+
+  .pricing-card__features {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88em;
+    flex-grow: 1;
+  }
+
+  .pricing-card__features li::before {
+    content: '\2713 ';
+    color: var(--green-dark);
+    font-weight: 700;
+  }
+
+  .pricing-card__cta {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.92em;
+    transition: all 0.2s;
+    margin-top: 8px;
+    text-decoration: none;
+  }
+
+  .pricing-card__cta.cta-gold {
+    background: var(--gold);
+    color: var(--white);
+  }
+
+  .pricing-card__cta.cta-gold:hover {
+    background: #B8891E;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .pricing-card__cta.cta-outline {
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+  }
+
+  .pricing-card__cta.cta-outline:hover {
+    background: var(--gold);
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .pricing-card__note {
+    font-size: 0.82em;
+    color: var(--green-dark);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .pricing-card {
+      padding: 22px 20px;
+    }
+
+    .pricing-card__title {
+      font-size: 1.05em;
+    }
+
+    .pricing-card__price {
+      font-size: 2.3em;
+    }
+
+    .pricing-card__features {
+      font-size: 0.95em;
+    }
+
+    .pricing-card__cta {
+      padding: 13px;
+      font-size: 0.95em;
+    }
+
+    .pricing-card__note {
+      font-size: 0.85em;
+    }
+  }
+</style>

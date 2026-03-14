@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import CTABox from '../components/CTABox.astro';
+import BarrioTag from '../components/BarrioTag.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import CalendlySection from '../components/CalendlySection.astro';
+
+import serviciosData from '../data/servicios.json';
+import barriosData from '../data/barrios.json';
+
+const servicio = serviciosData.find(s => s.slug === 'salud-hormonal')!;
+const barriosDestacados = barriosData.slice(0, 3);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Salud hormonal femenina - Nutricionista Leganés",
+  "description": servicio.description,
+  "provider": {
+    "@type": "Dietitian",
+    "name": "Soraya Sánchez & José Luis Todolí"
+  },
+  "areaServed": "Leganés",
+  "priceRange": "50€ - 140€"
+};
+---
+
+<BaseLayout
+  title={servicio.metaTitle}
+  description={servicio.metaDescription}
+  canonical={`/${servicio.slug}`}
+  schema={schema}
+>
+  <Nav slot="nav" />
+
+  <Breadcrumb items={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Servicios', href: '/#servicios' },
+    { label: servicio.title }
+  ]} />
+
+  <Hero
+    title={`${servicio.title} en Leganés`}
+    description={servicio.description}
+    location="Leganés"
+    showVideo={true}
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">¿Qué incluye el servicio?</h2>
+      <div class="benefits-grid">
+        {servicio.benefits.map(benefit => (
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <p>{benefit}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">¿Para quién es este servicio?</h2>
+      <div class="grid grid--3" style="max-width: 900px; margin: 0 auto;">
+        {servicio.forWho.map(item => (
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: var(--spacing-md);">🌸</div>
+            <p style="color: var(--color-text-primary); font-weight: 500;">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">¿Cómo funciona?</h2>
+      <div class="grid grid--3">
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">1️⃣</div>
+          <h3>Evaluación hormonal</h3>
+          <p style="color: var(--color-text-secondary);">
+            Análisis de tu situación hormonal y sintomatología actual. <strong>50€</strong>
+          </p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">2️⃣</div>
+          <h3>Plan hormonal</h3>
+          <p style="color: var(--color-text-secondary);">
+            Plan nutricional específico para tu condición (SOP, menopausia, fertilidad, etc.)
+          </p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">3️⃣</div>
+          <h3>Equilibrio</h3>
+          <p style="color: var(--color-text-secondary);">
+            Ajustes progresivos según tu evolución hormonal. <strong>40€/revisión</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Zonas de Leganés donde atiendo</h2>
+      <p class="text-center" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); max-width: 600px; margin-left: auto; margin-right: auto;">
+        Consulta presencial en el Clínica Podoimas, accesible desde todo Leganés.
+      </p>
+      <div class="barrios-grid">
+        {barriosDestacados.map(barrio => (
+          <BarrioTag name={barrio.name} href={`/${barrio.slug}`} />
+        ))}
+        <BarrioTag name="Ver todas las zonas" href="/#barrios" />
+      </div>
+    </div>
+  </section>
+
+  <RelatedServices
+    currentServiceId="salud-hormonal"
+    relatedIds={["salud-digestiva", "perdida-de-peso"]}
+  />
+
+  <!-- Calendario de reservas -->
+  <CalendlySection />
+
+  <CTABox
+    title="Cuida tu salud hormonal"
+    description="Reserva tu primera consulta y mejora tu bienestar hormonal con nutrición especializada."
+    ctaText="Reservar consulta"
+    ctaHref="#reservar"
+    variant="trust"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .benefit-item {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+    background-color: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .benefit-icon {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    flex-shrink: 0;
+  }
+
+  .benefit-item p {
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .barrios-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+</style>

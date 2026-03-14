@@ -1,0 +1,98 @@
+---
+interface Props {
+  type: 'soraya' | 'jose' | 'soraya-parejas' | 'jose-parejas';
+}
+
+const { type } = Astro.props;
+
+const urls: Record<string, string> = {
+  'soraya': 'https://calendly.com/leganes/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
+  'jose': 'https://calendly.com/joseluistodoli/primera-consulta?hide_event_type_details=1&hide_gdpr_banner=1',
+  'soraya-parejas': 'https://calendly.com/leganes/primera-consulta-leganes-clon?hide_event_type_details=1&hide_gdpr_banner=1',
+  'jose-parejas': 'https://calendly.com/joseluistodoli/primera-consulta-pareja?hide_event_type_details=1&hide_gdpr_banner=1',
+};
+
+const calendlyUrl = urls[type];
+---
+
+<div class="calendly-embed" data-calendly-url={calendlyUrl}>
+  <div class="calendly-placeholder">
+    <div class="calendly-placeholder__content">
+      <p>Cargando calendario de reservas...</p>
+    </div>
+  </div>
+  <div
+    class="calendly-inline-widget"
+    data-url={calendlyUrl}
+    style="min-width:280px;height:700px;display:none;"
+  ></div>
+</div>
+
+<script>
+  let calendlyLoaded = false;
+
+  function loadCalendly() {
+    if (calendlyLoaded) return;
+    calendlyLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const embeds = document.querySelectorAll('.calendly-embed');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const placeholder = entry.target.querySelector('.calendly-placeholder') as HTMLElement;
+          const widget = entry.target.querySelector('.calendly-inline-widget') as HTMLElement;
+
+          loadCalendly();
+
+          setTimeout(() => {
+            if (placeholder && widget) {
+              placeholder.style.display = 'none';
+              widget.style.display = 'block';
+            }
+          }, 500);
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '200px'
+    });
+
+    embeds.forEach((embed) => observer.observe(embed));
+  });
+</script>
+
+<style>
+  .calendly-embed {
+    width: 100%;
+    margin: var(--spacing-sm) 0;
+  }
+
+  .calendly-placeholder {
+    min-width: 280px;
+    height: 700px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendly-placeholder__content {
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+
+  .calendly-placeholder__content p {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+</style>

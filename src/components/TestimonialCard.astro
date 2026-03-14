@@ -1,0 +1,122 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  service?: string;
+  rating?: number;
+  meta?: string;
+}
+
+const { quote, author, service, rating = 5, meta } = Astro.props;
+
+const stars = "\u2605".repeat(rating);
+const initials = author.split(' ').map(n => n[0]).join('').slice(0, 1);
+---
+
+<div class="resena-card">
+  <div class="resena-header">
+    <div class="resena-avatar">{initials}</div>
+    <div>
+      <div class="resena-name">{author}</div>
+      {meta && <div class="resena-meta">{meta}</div>}
+    </div>
+  </div>
+  <div class="resena-stars">{stars}</div>
+  <p class="resena-text">{quote}</p>
+  {service && <span class="resena-badge">{service}</span>}
+</div>
+
+<style>
+  .resena-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all var(--transition-base);
+  }
+
+  .resena-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .resena-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .resena-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--green-dark);
+    flex-shrink: 0;
+  }
+
+  .resena-name {
+    font-weight: 700;
+    font-size: 0.88em;
+    color: var(--text);
+  }
+
+  .resena-meta {
+    font-size: 0.75em;
+    color: var(--text-light);
+  }
+
+  .resena-stars {
+    color: var(--gold);
+    font-size: 0.85em;
+  }
+
+  .resena-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: 700;
+    background: var(--green-pale);
+    color: var(--green-dark);
+    width: fit-content;
+  }
+
+  .resena-text {
+    font-size: 0.84em;
+    color: var(--text-light);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .resena-card {
+      padding: 16px;
+    }
+
+    .resena-name {
+      font-size: 0.95em;
+    }
+
+    .resena-meta {
+      font-size: 0.85em;
+    }
+
+    .resena-stars {
+      font-size: 0.88em;
+    }
+
+    .resena-text {
+      font-size: 0.95em;
+    }
+  }
+</style>

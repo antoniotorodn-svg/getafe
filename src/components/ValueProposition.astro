@@ -1,0 +1,118 @@
+---
+// Propuesta de valor - 4 bloques estilo Mentaris
+---
+
+<div class="value-grid">
+  <div class="value-item">
+    <div class="value-icon-wrap">
+      <span class="value-emoji">&#127823;</span>
+    </div>
+    <h3 class="value-title">Plan 100% personalizado</h3>
+    <p class="value-text">
+      Cada cuerpo es único, por eso tu plan está adaptado a tus objetivos, gustos y estilo de vida.
+    </p>
+  </div>
+
+  <div class="value-item">
+    <div class="value-icon-wrap">
+      <span class="value-emoji">&#127919;</span>
+    </div>
+    <h3 class="value-title">Acompañamiento continuo</h3>
+    <p class="value-text">
+      Resolución de dudas y ajustes constantes para que siempre estés acompañado en el proceso.
+    </p>
+  </div>
+
+  <div class="value-item">
+    <div class="value-icon-wrap">
+      <span class="value-emoji">&#128202;</span>
+    </div>
+    <h3 class="value-title">Enfoque basado en ciencia</h3>
+    <p class="value-text">
+      Sin dietas milagro. Todo está respaldado por evidencia científica y experiencia clínica.
+    </p>
+  </div>
+
+  <div class="value-item">
+    <div class="value-icon-wrap">
+      <span class="value-emoji">&#129367;</span>
+    </div>
+    <h3 class="value-title">Sin restricciones absurdas</h3>
+    <p class="value-text">
+      No se trata de prohibir, sino de crear un equilibrio sostenible que puedas mantener siempre.
+    </p>
+  </div>
+</div>
+
+<style>
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .value-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .value-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .value-item {
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    transition: all var(--transition-base);
+  }
+
+  .value-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .value-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    transition: all var(--transition-base);
+  }
+
+  .value-item:hover .value-icon-wrap {
+    background: var(--gold);
+    transform: scale(1.08);
+  }
+
+  .value-emoji {
+    font-size: 1.5rem;
+  }
+
+  .value-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
+  }
+
+  .value-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,1012 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CalendlySection from '../components/CalendlySection.astro';
+import BarrioTag from '../components/BarrioTag.astro';
+import MaterialFormativo from '../components/MaterialFormativo.astro';
+import CTABox from '../components/CTABox.astro';
+import barriosData from '../data/barrios.json';
+import serviciosData from '../data/servicios.json';
+
+const faqItems = [
+  {
+    question: "¿Dónde está la consulta de nutrición en Leganés?",
+    answer: "Nuestra consulta de nutrición en Leganés está en la Calle Ntra. Sra. de Begoña 8, dentro de la Clínica Podoimas. Es una zona céntrica con buena conexión en transporte público (Metro Leganés Central, Cercanías) y aparcamiento disponible en las calles cercanas."
+  },
+  {
+    question: "¿Quiénes son los nutricionistas en Leganés?",
+    answer: "En Leganés te atenderán José Luis Todolí y Soraya Sánchez, dietistas-nutricionistas con experiencia en pérdida de grasa, nutrición clínica y educación alimentaria. Ambos forman parte del equipo de nutricionistaenleganes.com y llevan años atendiendo pacientes en el sur de Madrid."
+  },
+  {
+    question: "¿Qué se hace en la primera consulta de nutrición en Leganés?",
+    answer: "Soraya o José Luis te harán una entrevista detallada para entender tu punto de partida: hábitos, rutina, posibles intolerancias y objetivos. En un máximo de 72 horas tendrás tu plan nutricional por email con menús adaptados a tus gustos, recetas prácticas y lista de la compra."
+  },
+  {
+    question: "¿Cada cuánto son las revisiones con el nutricionista?",
+    answer: "Las revisiones son cada 21 días. Comprobaremos tus avances, resolveremos dudas y haremos los ajustes que tu plan necesite. Entre consultas puedes escribir por WhatsApp para consultar cualquier duda sin coste adicional."
+  },
+  {
+    question: "¿Cuánto cuesta el nutricionista en Leganés?",
+    answer: "Primera consulta: 50€ (incluye entrevista + plan + material formativo). Revisiones: 50€. Pack de 4 sesiones (primera + 3 revisiones): 140€ — ahorras 30€ respecto a contratarlas por separado. Aceptamos pago en efectivo y tarjeta."
+  },
+  {
+    question: "¿Tendré que comprar suplementos o productos especiales?",
+    answer: "No. Nuestros nutricionistas en Leganés trabajan únicamente con planes basados en alimentación real y adaptados a tu día a día. Sin suplementos, sin productos extras, sin gasto adicional. Solo comida de verdad."
+  },
+  {
+    question: "¿Cuál es el horario de la consulta en Leganés?",
+    answer: "De lunes a viernes de 9:00 a 21:00. Puedes reservar por teléfono (623 99 89 39), WhatsApp (644 98 52 09) o a través del calendario online de esta misma página."
+  },
+  {
+    question: "¿El nutricionista en Leganés también atiende online?",
+    answer: "Sí. Además de la consulta presencial en Leganés, ofrecemos consulta online por videollamada con la misma calidad, plan personalizado y seguimiento. Ideal si no puedes desplazarte o vives fuera de Leganés."
+  },
+  {
+    question: "¿Hacéis dietas para deportistas en Leganés?",
+    answer: "Sí. José Luis está especializado en nutrición deportiva: running, CrossFit, pádel, fútbol sala, ciclismo y más. Adaptamos la alimentación a tus entrenamientos, competiciones y objetivos de rendimiento o composición corporal."
+  },
+  {
+    question: "¿Puedo ir al nutricionista en Leganés si tengo una patología?",
+    answer: "Por supuesto. Trabajamos con diabetes tipo 2, colesterol, hipertensión, SOP, problemas digestivos (SIBO, colon irritable, intolerancias), menopausia y más. Nuestros nutricionistas en Leganés coordinan con tu médico si es necesario."
+  }
+];
+
+const testimonials = [
+  {
+    quote: "He aprendido a cocinar cosas nuevas y a organizarme con los tuppers de la semana. Los planes son muy completos y las recetas fáciles de hacer.",
+    author: "Marta R.",
+    rating: 5
+  },
+  {
+    quote: "Lo que más me ha gustado es que puedo seguir saliendo a comer fuera sin agobiarme. Es un enfoque muy flexible y realista.",
+    author: "Carlos G.",
+    rating: 5
+  },
+  {
+    quote: "Tras años con dietas de internet, por fin me han enseñado a comer con lógica. Los dossiers que te dan en cada revisión son un lujo.",
+    author: "Laura P.",
+    rating: 5
+  },
+  {
+    quote: "Me han ayudado a organizar la alimentación alrededor de mis turnos de trabajo. Nunca me habían dado un plan tan adaptado a mis horarios.",
+    author: "Javier M.",
+    rating: 5
+  },
+  {
+    quote: "No solo he perdido peso, me encuentro con más energía que hace años. La atención entre consultas es increíble.",
+    author: "Sandra T.",
+    rating: 5
+  },
+  {
+    quote: "En ningún momento me han hecho sentir mal. Te explican, te acompañan y te motivan. Ojalá hubiera ido antes.",
+    author: "Roberto F.",
+    rating: 5
+  },
+  {
+    quote: "He entendido por qué no perdía peso antes. Me lo explicaron todo con mucha paciencia y sin tecnicismos. Muy recomendable.",
+    author: "Ana M.",
+    rating: 5
+  },
+  {
+    quote: "El equipo es muy cercano y profesional. Lo mejor es que no te dan una dieta genérica, todo está pensado para tu día a día real.",
+    author: "Pedro L.",
+    rating: 5
+  },
+  {
+    quote: "Llevaba años intentándolo sola y en 3 meses he conseguido más que en los últimos 5 años. El material formativo es espectacular.",
+    author: "Carmen S.",
+    rating: 5
+  },
+  {
+    quote: "Mi pareja y yo fuimos juntos y los dos estamos encantados. Nos han enseñado a planificar las cenas y los fines de semana.",
+    author: "David y Lucía",
+    rating: 5
+  },
+  {
+    quote: "Me han cambiado la relación con la comida. Antes me sentía culpable por todo, ahora disfruto comiendo bien y sin ansiedad.",
+    author: "Elena R.",
+    rating: 5
+  },
+  {
+    quote: "Fui por un tema de colesterol y no solo me han bajado las cifras sino que he aprendido a comer de verdad. Un 10.",
+    author: "Francisco J.",
+    rating: 5
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HealthBusiness",
+  "name": "Nutricionista en Leganés — Soraya Sánchez y José Luis Todolí",
+  "description": "Consulta de nutrición en Leganés. Dietistas-nutricionistas colegiados especializados en pérdida de peso, nutrición deportiva, salud digestiva y hormonal.",
+  "url": "https://nutricionistaenleganes.com",
+  "telephone": "+34623998939",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Nuestra Señora de Begoña, 8",
+    "addressLocality": "Leganés",
+    "addressRegion": "Madrid",
+    "postalCode": "28911",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.3283,
+    "longitude": -3.7648
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "21:00"
+    }
+  ],
+  "priceRange": "50€ - 140€",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47"
+  }
+};
+---
+
+<BaseLayout
+  title="Nutricionista en Leganés | Clínica Podoimas · Primera consulta 50€"
+  description="Nutricionistas colegiados en Leganés. Planes personalizados para perder peso, nutrición deportiva, salud digestiva y hormonal. Clínica Podoimas, C/ Ntra. Sra. de Begoña 8. Primera consulta 50€. Reserva hoy."
+  schema={faqSchema}
+>
+  <Nav slot="nav" />
+
+  <!-- Schema LocalBusiness -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+  <!-- 1. HERO — foto de ambos + vídeo vertical -->
+  <Hero
+    name="Nutricionista en Leganés"
+    role="Tu cambio empieza aquí"
+    showVideo={true}
+    location="Clínica Podoimas · Leganés"
+    description=""
+    benefits={[]}
+  />
+
+  <!-- Trust Strip -->
+  <TrustStrip />
+
+  <!-- 2. INTRO SEO — Texto largo para posicionamiento -->
+  <section class="section" id="nutricionista-leganes">
+    <div class="container">
+      <div class="seo-intro">
+        <h2 class="section-title">Tu nutricionista en Leganés: alimentación real, resultados reales</h2>
+        <div class="seo-intro__text">
+          <p><strong>Somos José Luis, Soraya y Antonio.</strong> Durante los últimos 7 años hemos perfeccionado un método de trabajo que utilizamos tanto en esta consulta como en el resto de centros que tenemos en el sur de Madrid: <strong>Alcorcón, Fuenlabrada, Getafe y Móstoles.</strong></p>
+          <p>Si estás buscando un <strong>nutricionista en Leganés</strong> que te escuche, te entienda y diseñe un plan que encaje en tu rutina, estás en el sitio adecuado. No creemos en las dietas restrictivas ni en los planes genéricos. Cada persona es diferente y su alimentación también debería serlo.</p>
+          <p>Nuestro enfoque se basa en tres pilares: <strong>alimentación real</strong> (comida de verdad, sin sustitutivos ni batidos), <strong>educación nutricional</strong> (que entiendas el porqué de cada decisión) y <strong>acompañamiento constante</strong> (no te dejamos solo/a entre consultas).</p>
+          <p style="font-weight: 700; color: var(--text);">Sigue leyendo y te contamos exactamente cómo podemos ayudarte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROCESO — ¿Cómo funciona? -->
+  <section class="section section--warm" id="proceso">
+    <div class="container">
+      <h2 class="section-title">¿Cómo es el proceso?</h2>
+      <div class="proceso-grid">
+        <div class="proceso-card">
+          <div class="proceso-icon">📋</div>
+          <h3>Primera consulta</h3>
+          <p>Analizaremos tu situación actual en profundidad, completaremos un cuestionario personalizado y definiremos la mejor estrategia para tu caso.</p>
+        </div>
+        <div class="proceso-card">
+          <div class="proceso-icon">📩</div>
+          <h3>Recibes tu plan</h3>
+          <p>En un máximo de 72 horas tendrás tu plan nutricional por correo electrónico. Desde ese momento, estaremos disponibles para resolver cualquier duda.</p>
+        </div>
+        <div class="proceso-card">
+          <div class="proceso-icon">📊</div>
+          <h3>Consultas de seguimiento</h3>
+          <p>Cada 21 días evaluaremos tu progreso, ajustaremos el plan si hace falta y te daremos material formativo adicional para que sigas aprendiendo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PRECIOS -->
+  <section class="section" id="precios">
+    <div class="container">
+      <h2 class="section-title">Precios: Nutricionista en Leganés</h2>
+      <p class="section-sub">Elige la opción que mejor se adapte a ti.</p>
+
+      <div class="pricing-row">
+        <!-- Sesión individual -->
+        <div class="price-basic">
+          <div class="price-basic-label">Sesión individual</div>
+          <div class="price-basic-header">Primera consulta</div>
+          <div class="price-basic-amount">50<span>€</span></div>
+          <ul class="price-basic-list">
+            <li>✓ Entrevista inicial completa</li>
+            <li>✓ Plan nutricional personalizado</li>
+            <li>✓ Material de apoyo incluido</li>
+          </ul>
+          <div class="price-basic-revision">Revisiones sueltas: 50€/sesión</div>
+          <a href="#reservar" class="price-basic-btn">PEDIR CITA</a>
+        </div>
+
+        <!-- Pack destacado -->
+        <div class="price-pack">
+          <div class="pack-badge-top">⭐ MÁS ELEGIDO — AHORRA 30€</div>
+          <div class="pack-header">
+            <h3>Pack: Primera + 3 Revisiones</h3>
+            <p>Ahorra contratando tu bono</p>
+          </div>
+          <div class="pack-price-row">
+            <div class="pack-old-price">170€</div>
+            <div class="pack-new-price">140<span>€</span></div>
+          </div>
+          <div class="pack-savings">Ahorro de 30€ respecto a contratar por separado</div>
+          <ul class="pack-features">
+            <li>Incluye 4 sesiones completas</li>
+            <li>Plan nutricional + ajustes continuos</li>
+            <li>Soporte de dudas entre consultas</li>
+            <li>Todo el material formativo</li>
+            <li>Mayor compromiso, mejores resultados</li>
+          </ul>
+          <a href="#reservar" class="pack-btn">PEDIR CITA</a>
+        </div>
+      </div>
+
+      <!-- Nota parejas -->
+      <div class="parejas-note">
+        <p class="parejas-title">💑 <strong>Nota:</strong> En caso de parejas se aplica un <strong>descuento del 30% en las revisiones</strong></p>
+        <p class="parejas-detail">Primera consulta pareja: 100€ · Revisión pareja: 55€ (30% dto) · Bono 4 consultas parejas: 220€ (Ahorro 45€)</p>
+        <a href="#reservar" class="parejas-btn">Reservar cita para 2 personas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. UBICACIÓN + MAPA -->
+  <section class="section section--alt" id="ubicacion">
+    <div class="container">
+      <h2 class="section-title">¿Dónde pasamos consulta en Leganés?</h2>
+      <div class="location-box">
+        <div class="location-info">
+          <div class="location-row">
+            <span class="location-icon">📍</span>
+            <div>
+              <strong>Dirección</strong>
+              <span>Calle Ntra. Sra. de Begoña 8 (Clínica Podoimas), 28911 Leganés</span>
+            </div>
+          </div>
+          <div class="location-row">
+            <span class="location-icon">📞</span>
+            <div>
+              <strong>Teléfono</strong>
+              <span><a href="tel:+34623998939">623 99 89 39</a></span>
+            </div>
+          </div>
+          <div class="location-row">
+            <span class="location-icon">💬</span>
+            <div>
+              <strong>WhatsApp</strong>
+              <span><a href="https://wa.me/34644985209?text=Hola%2C%20quiero%20informarme%20sobre%20Leganés" target="_blank" rel="noopener">644 98 52 09</a></span>
+            </div>
+          </div>
+          <div class="location-row">
+            <span class="location-icon">🕐</span>
+            <div>
+              <strong>Horarios</strong>
+              <span>De Lunes a Viernes de 9:00 a 21:00</span>
+            </div>
+          </div>
+          <div class="location-row">
+            <span class="location-icon">🚇</span>
+            <div>
+              <strong>Cómo llegar</strong>
+              <span>Metro Leganés Central (L12) · Cercanías Leganés · Parking cercano</span>
+            </div>
+          </div>
+          <div class="location-actions">
+            <a href="tel:+34623998939" class="loc-btn loc-btn--primary">Llamar al 623 99 89 39</a>
+            <a href="https://wa.me/34644985209?text=Hola%2C%20quiero%20informarme%20sobre%20Leganés" target="_blank" rel="noopener" class="loc-btn loc-btn--outline">Enviar WhatsApp</a>
+          </div>
+        </div>
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3013.5!2d-3.7648!3d40.3283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3f2617fce4c01f%3A0xbd2e43eb7b6bc5b1!2sC.%20Ntra.%20Sra.%20de%20Bego%C3%B1a%2C%208%2C%2028911%20Legan%C3%A9s!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Nutricionista en Leganés — Clínica Podoimas, C/ Ntra. Sra. de Begoña 8"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RESERVA CITA (Calendly con tabs) -->
+  <CalendlySection />
+
+  <!-- 7. FAQ -->
+  <section class="section section--warm" id="faq">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes sobre el nutricionista en Leganés</h2>
+      <p class="section-sub">¿Tienes alguna duda? Puede que esta sección despeje alguna de ellas:</p>
+      <FAQAccordion items={faqItems} />
+    </div>
+  </section>
+
+  <!-- CTA intermedio -->
+  <CTABox
+    title="¿Listo/a para cambiar tu alimentación?"
+    description="Reserva tu primera consulta con nuestros nutricionistas en Leganés. 50€, sin compromiso. Llama al 623 99 89 39 o escríbenos por WhatsApp al 644 98 52 09."
+    ctaText="Reservar mi cita"
+    ctaHref="#reservar"
+    variant="trust"
+  />
+
+  <!-- 8. QUÉ NOS DIFERENCIA -->
+  <section class="section section--alt" id="diferencia">
+    <div class="container">
+      <h2 class="section-title">Esto es lo que nos diferencia de otros nutricionistas en Leganés</h2>
+      <div class="diff-text">
+        <p>Nutricionista.io nació en 2017 como el proyecto de un solo profesional. Hoy <strong>somos un equipo de 20 dietistas-nutricionistas</strong> repartidos por toda España, con consultas presenciales en Leganés, Alcorcón, Fuenlabrada, Getafe y Móstoles.</p>
+        <p>A lo largo de estos años hemos perfeccionado un método de trabajo centrado en lo que realmente funciona: <strong>alimentación real, educación nutricional y acompañamiento constante.</strong> Sin atajos, sin promesas vacías.</p>
+        <p>Cuando vienes a nuestro nutricionista en Leganés no solo recibes un plan a tu medida. Te damos las herramientas para que los cambios se mantengan en el tiempo:</p>
+      </div>
+
+      <!-- Tres pilares destacados -->
+      <div class="pilares-grid">
+        <div class="pilar-card">
+          <div class="pilar-num">1</div>
+          <h3>Material formativo en cada revisión</h3>
+          <p>Dossiers prácticos sobre etiquetado, metabolismo, pérdida de grasa, adherencia y más. No solo te damos un plan: te enseñamos el porqué.</p>
+        </div>
+        <div class="pilar-card">
+          <div class="pilar-num">2</div>
+          <h3>Área de Pacientes exclusiva</h3>
+          <p>Vídeos, guías, infografías, calculadoras y recetarios. Más de 110 recursos para que seas tu propio experto en nutrición.</p>
+        </div>
+        <div class="pilar-card">
+          <div class="pilar-num">3</div>
+          <h3>Comunidad de WhatsApp</h3>
+          <p>Recetas semanales, productos recomendados, ideas prácticas y soporte entre consultas. No estás solo/a en el proceso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. MATERIAL FORMATIVO -->
+  <section class="section" id="material">
+    <div class="container">
+      <h2 class="section-title">Material formativo que recibirás</h2>
+      <p class="section-sub">En cada revisión con tu nutricionista en Leganés recibirás un nuevo dossier. Temas como el etiquetado, pérdida de grasa, metabolismo y adherencia:</p>
+      <MaterialFormativo />
+    </div>
+  </section>
+
+  <!-- 10. ¿PARA QUIÉN ES? — SEO content -->
+  <section class="section section--warm" id="para-quien">
+    <div class="container">
+      <h2 class="section-title">¿Para quién es nuestro servicio de nutrición en Leganés?</h2>
+      <p class="section-sub">Trabajamos con todo tipo de perfiles. Si te identificas con alguna de estas situaciones, podemos ayudarte:</p>
+      <div class="para-quien-grid">
+        <div class="para-quien-card">
+          <span class="para-quien-icon">⚖️</span>
+          <h3>Quieres perder peso de verdad</h3>
+          <p>Has probado varias dietas y ninguna ha funcionado a largo plazo. Necesitas un enfoque personalizado que se adapte a tu día a día, sin pasar hambre y sin efecto rebote.</p>
+        </div>
+        <div class="para-quien-card">
+          <span class="para-quien-icon">🏃</span>
+          <h3>Haces deporte y quieres rendir más</h3>
+          <p>Corres, vas al gimnasio, juegas al pádel o practicas CrossFit. Tu alimentación debería estar a la altura de tu entrenamiento. Te ayudamos a optimizar rendimiento y recuperación.</p>
+        </div>
+        <div class="para-quien-card">
+          <span class="para-quien-icon">🩺</span>
+          <h3>Tienes una patología que mejorar</h3>
+          <p>Diabetes tipo 2, colesterol alto, hipertensión, SOP, problemas digestivos, intolerancias... La alimentación es una herramienta terapéutica poderosa y podemos guiarte.</p>
+        </div>
+        <div class="para-quien-card">
+          <span class="para-quien-icon">🔄</span>
+          <h3>Quieres aprender a comer bien</h3>
+          <p>No tienes un objetivo concreto de peso, pero sabes que tu alimentación podría mejorar. Quieres entender qué comes, organizarte mejor y sentirte con más energía.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. TESTIMONIOS -->
+  <section class="section section--alt" id="testimonios">
+    <div class="container">
+      <div class="testi-header">
+        <span class="testi-stars-big">★★★★★</span>
+        <h2 class="section-title">Lo que dicen nuestros pacientes en Leganés</h2>
+        <p class="section-sub">Estas son solo algunas valoraciones. Puedes encontrar más en nuestros perfiles de Google.</p>
+      </div>
+      <div class="resenas-grid">
+        {testimonials.map(testimonial => (
+          <TestimonialCard
+            quote={testimonial.quote}
+            author={testimonial.author}
+            rating={testimonial.rating}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <h2 class="section-title">Servicios de nutrición en Leganés</h2>
+      <p class="section-sub">Sea cual sea tu objetivo, nuestros nutricionistas en Leganés tienen un plan para ti. Cada consulta es diferente porque cada persona es diferente.</p>
+      <div class="servicios-grid">
+        {serviciosData.map(servicio => (
+          <ServiceCard
+            emoji={servicio.emoji}
+            title={servicio.title}
+            description={servicio.shortDesc}
+            href={`/${servicio.slug}`}
+          />
+        ))}
+        <ServiceCard
+          emoji="💻"
+          title="Consulta online"
+          description="La misma calidad desde casa. Videollamada, plan personalizado y seguimiento completo"
+          href="/nutricionista-online"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. BARRIOS (SEO local) -->
+  <section class="section section--alt" id="barrios">
+    <div class="container">
+      <h2 class="section-title">Nutricionista cerca de ti en Leganés</h2>
+      <p class="section-sub">Atendemos a pacientes de todos los barrios de Leganés. Nuestra consulta está en el centro, a pocos minutos de cualquier zona del municipio.</p>
+      <div class="barrios-grid">
+        {barriosData.map(barrio => (
+          <BarrioTag name={barrio.name} href={`/${barrio.slug}`} />
+        ))}
+        <BarrioTag name="Consulta online (toda España)" href="/nutricionista-online" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO bottom text -->
+  <section class="section">
+    <div class="container">
+      <div class="seo-bottom">
+        <h2>Nutricionista en Leganés: todo lo que necesitas saber</h2>
+        <p>Encontrar un buen <strong>nutricionista en Leganés</strong> puede marcar la diferencia entre seguir una dieta más o hacer un cambio real en tu alimentación. En nuestra consulta de la Clínica Podoimas (C/ Ntra. Sra. de Begoña 8) te ofrecemos un servicio de <strong>nutrición personalizada</strong> con profesionales colegiados que llevan años trabajando en el sur de Madrid.</p>
+        <p>Ya sea que busques un <strong>dietista en Leganés</strong> para perder peso, mejorar tu rendimiento deportivo, controlar una patología como la diabetes o el colesterol, o simplemente aprender a comer mejor, nuestro equipo puede ayudarte. Trabajamos con un método probado que combina planes nutricionales individualizados, material educativo y seguimiento continuo por WhatsApp.</p>
+        <p>La primera consulta tiene un precio de <strong>50€</strong> e incluye entrevista completa, plan nutricional personalizado y material de apoyo. Si prefieres un compromiso mayor, el <strong>pack de 4 sesiones por 140€</strong> (ahorro de 30€) es la opción más elegida por nuestros pacientes. Atendemos de lunes a viernes de 9:00 a 21:00, tanto de forma <strong>presencial en Leganés</strong> como <strong>online por videollamada</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <CTABox
+    title="Tu salud no puede esperar más"
+    description="Reserva tu primera consulta con nuestros nutricionistas en Leganés por solo 50€. Llama al 623 99 89 39 o escríbenos por WhatsApp al 644 98 52 09."
+    ctaText="Reservar mi cita ahora"
+    ctaHref="#reservar"
+    variant="trust"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Warm background */
+  .section--warm {
+    background: linear-gradient(135deg, #FDF6EC 0%, #F9E8D2 50%, #FEF9F0 100%);
+  }
+
+  /* SEO INTRO */
+  .seo-intro {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .seo-intro__text {
+    margin-top: var(--spacing-lg);
+  }
+
+  .seo-intro__text p {
+    font-size: 0.95em;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .seo-intro__text strong {
+    color: var(--text);
+  }
+
+  /* PROCESO — 3 columnas */
+  .proceso-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .proceso-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+
+  .proceso-card {
+    text-align: center;
+    background: var(--white);
+    padding: 32px 24px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+  }
+
+  .proceso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .proceso-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #F9E8D2, #F6DDAE);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+
+  .proceso-card h3 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: var(--font-body);
+  }
+
+  .proceso-card p {
+    font-size: 0.88em;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* PRECIOS */
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .pricing-row {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+    .price-pack { order: -1; }
+  }
+
+  .price-basic {
+    background: var(--white);
+    border: 1.5px solid var(--text);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .price-basic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .price-basic-label {
+    background: var(--text);
+    color: var(--white);
+    padding: 7px;
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .price-basic-header {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    padding-top: 24px;
+  }
+
+  .price-basic-amount {
+    font-size: 2.6em;
+    font-weight: 800;
+    color: var(--gold);
+    margin: 12px 0 18px;
+    padding: 0 26px;
+  }
+
+  .price-basic-amount span { font-size: 0.5em; }
+
+  .price-basic-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 18px;
+    padding: 0 26px;
+  }
+
+  .price-basic-list li {
+    padding: 6px 0;
+    font-size: 0.88em;
+    color: var(--text-light);
+  }
+
+  .price-basic-revision {
+    font-size: 0.82em;
+    color: var(--text-light);
+    margin-bottom: 18px;
+    padding: 0 26px;
+  }
+
+  .price-basic-btn {
+    display: block;
+    margin: 0 26px 26px;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--white);
+    border-radius: 100px;
+    font-size: 0.88em;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .price-basic-btn:hover {
+    background: #B8891E;
+    text-decoration: none;
+    color: var(--white);
+  }
+
+  .price-pack {
+    background: var(--white);
+    border: 2.5px solid var(--gold);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 6px 32px rgba(212, 168, 67, 0.15);
+    transition: all 0.3s;
+  }
+
+  .price-pack:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(212, 168, 67, 0.22);
+  }
+
+  .pack-badge-top {
+    background: linear-gradient(135deg, var(--gold) 0%, #C9982E 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 8px;
+    font-size: 0.75em;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .pack-header { padding: 24px 26px 0; text-align: center; }
+  .pack-header h3 { font-size: 1.1em; font-weight: 700; color: var(--text); margin-bottom: 2px; font-family: var(--font-body); }
+  .pack-header p { font-size: 0.82em; color: var(--text-light); margin: 0; }
+
+  .pack-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 26px 6px;
+  }
+
+  .pack-old-price { font-size: 1.25em; color: #bbb; text-decoration: line-through; font-weight: 600; }
+  .pack-new-price { font-size: 2.6em; font-weight: 800; color: var(--gold); }
+  .pack-new-price span { font-size: 0.5em; }
+
+  .pack-savings {
+    text-align: center;
+    margin: 0 26px 18px;
+    padding: 6px 14px;
+    background: #FFF8E7;
+    border-radius: 50px;
+    font-size: 0.75em;
+    font-weight: 700;
+    color: #B8922E;
+  }
+
+  .pack-features { list-style: none; padding: 0 26px; margin-bottom: 20px; }
+  .pack-features li { padding: 7px 0; font-size: 0.88em; color: var(--text-light); display: flex; align-items: center; gap: 8px; }
+  .pack-features li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 0.95em; }
+
+  .pack-btn {
+    display: block;
+    margin: 0 26px 26px;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--white);
+    border-radius: 100px;
+    font-size: 0.88em;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .pack-btn:hover { background: #B8891E; text-decoration: none; color: var(--white); }
+
+  /* Parejas */
+  .parejas-note {
+    max-width: 720px;
+    margin: 24px auto 0;
+    background: #FFF8E7;
+    border: 2px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    text-align: center;
+  }
+
+  .parejas-title { margin: 0 0 8px; font-size: 0.95em; font-weight: 700; color: var(--text); }
+  .parejas-detail { margin: 0 0 14px; font-size: 0.88em; color: var(--text-light); }
+
+  .parejas-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--gold);
+    color: var(--white);
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.88em;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .parejas-btn:hover { background: #B8891E; text-decoration: none; color: var(--white); }
+
+  /* UBICACIÓN */
+  .location-box {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .location-box { grid-template-columns: 1fr; padding: 24px 20px; }
+  }
+
+  .location-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+  .location-icon { font-size: 1.1em; flex-shrink: 0; margin-top: 3px; }
+  .location-row strong { display: block; font-size: 0.88em; margin-bottom: 2px; }
+  .location-row span { font-size: 0.88em; color: var(--text-light); }
+  .location-row a { color: var(--gold); font-weight: 600; text-decoration: none; }
+  .location-row a:hover { text-decoration: underline; }
+
+  .location-actions { display: flex; gap: 12px; margin-top: 24px; }
+
+  @media (max-width: 900px) {
+    .location-actions { flex-direction: column; }
+  }
+
+  .loc-btn { flex: 1; padding: 14px; border-radius: 100px; text-align: center; font-weight: 700; font-size: 0.88em; text-decoration: none; transition: all 0.25s; }
+  .loc-btn--primary { background: var(--gold); color: var(--white); }
+  .loc-btn--primary:hover { background: #B8891E; text-decoration: none; color: var(--white); }
+  .loc-btn--outline { background: var(--sand); color: var(--text); }
+  .loc-btn--outline:hover { background: var(--sand-dark); text-decoration: none; }
+
+  .location-map { border-radius: var(--radius); overflow: hidden; min-height: 300px; }
+  .location-map iframe { width: 100%; height: 100%; min-height: 300px; border: 0; border-radius: var(--radius); }
+
+  /* DIFERENCIACIÓN */
+  .diff-text {
+    max-width: 680px;
+    margin: 0 auto var(--spacing-xl);
+  }
+
+  .diff-text p {
+    font-size: 0.95em;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  .diff-text strong { color: var(--text); }
+
+  /* Pilares */
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .pilares-grid { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .pilar-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    border-top: 3px solid var(--gold);
+    transition: all 0.3s;
+  }
+
+  .pilar-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .pilar-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 0.85em;
+    margin-bottom: 12px;
+  }
+
+  .pilar-card h3 {
+    font-size: 0.95em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: var(--font-body);
+  }
+
+  .pilar-card p {
+    font-size: 0.85em;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ¿PARA QUIÉN? */
+  .para-quien-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .para-quien-grid { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .para-quien-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+    border-left: 4px solid var(--gold);
+  }
+
+  .para-quien-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .para-quien-icon {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .para-quien-card h3 {
+    font-size: 0.95em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: var(--font-body);
+  }
+
+  .para-quien-card p {
+    font-size: 0.85em;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* TESTIMONIOS header */
+  .testi-header {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .testi-stars-big {
+    color: var(--gold);
+    font-size: 1.5em;
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 1100px) {
+    .resenas-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .resenas-grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* SERVICIOS */
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .servicios-grid { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* SEO BOTTOM TEXT */
+  .seo-bottom {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .seo-bottom h2 {
+    font-family: var(--font-display);
+    font-size: 1.5em;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+  }
+
+  .seo-bottom p {
+    font-size: 0.92em;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .seo-bottom strong { color: var(--text); }
+</style>

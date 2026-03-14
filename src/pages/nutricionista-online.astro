@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTABox from '../components/CTABox.astro';
+import CalendlySection from '../components/CalendlySection.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+import serviciosData from '../data/servicios.json';
+---
+
+<BaseLayout
+  title="Nutricionista online | nutricionistaenleganes.com · Consulta por videollamada"
+  description="Consulta de nutrición online por videollamada desde cualquier lugar de España. Soraya Sánchez y José Luis Todolí. Primera consulta 50€. Reserva cita."
+  canonical="/nutricionista-online"
+>
+  <Nav slot="nav" />
+
+  <Breadcrumb items={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Nutricionista online' }
+  ]} />
+
+  <Hero
+    title="Nutricionista online por Google Meet"
+    description="Cuida tu salud desde casa con consultas online profesionales. Misma calidad que la consulta presencial, sin desplazamientos."
+    location="Online"
+    showVideo={true}
+  />
+
+  <!-- Ventajas online -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">¿Por qué consulta online?</h2>
+
+      <div class="grid grid--3">
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🏠</div>
+          <h3>Sin desplazamientos</h3>
+          <p style="color: var(--color-text-secondary);">
+            Desde la comodidad de tu casa, sin perder tiempo en desplazamientos ni esperas.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🌍</div>
+          <h3>Desde cualquier lugar</h3>
+          <p style="color: var(--color-text-secondary);">
+            Vivas donde vivas en España, puedes acceder a nuestros servicios de nutrición.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">⏰</div>
+          <h3>Horarios flexibles</h3>
+          <p style="color: var(--color-text-secondary);">
+            Mayor disponibilidad de horarios adaptados a tu agenda profesional.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-xl);">¿Cómo funciona la consulta online?</h2>
+
+      <div class="grid grid--3">
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">1️⃣</div>
+          <h3>Reserva tu cita</h3>
+          <p style="color: var(--color-text-secondary);">
+            Elige día y hora en el calendario. Recibirás un enlace de Google Meet por email.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">2️⃣</div>
+          <h3>Videoconsulta</h3>
+          <p style="color: var(--color-text-secondary);">
+            Entrevista nutricional completa por Google Meet, como si estuvieras en consulta presencial.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">3️⃣</div>
+          <h3>Plan por email</h3>
+          <p style="color: var(--color-text-secondary);">
+            En 24-72h recibes tu plan nutricional personalizado por email con todo el material.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--spacing-md);">Todos los servicios disponibles online</h2>
+      <p class="text-center" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); max-width: 700px; margin-left: auto; margin-right: auto;">
+        Mismos servicios, misma calidad. Solo cambia la modalidad de la consulta.
+      </p>
+
+      <div class="grid grid--3">
+        {serviciosData.map(servicio => (
+          <ServiceCard
+            emoji={servicio.emoji}
+            title={servicio.title}
+            description={servicio.shortDesc}
+            href={`/${servicio.slug}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendario de reservas -->
+  <CalendlySection />
+
+  <CTABox
+    title="¿Prefieres consulta presencial?"
+    description="También atendemos en la Clínica Podoimas de Leganés. Elige la modalidad que prefieras."
+    ctaText="Ver consulta presencial"
+    ctaHref="/"
+    variant="trust"
+  />
+
+  <Footer slot="footer" />
+</BaseLayout>

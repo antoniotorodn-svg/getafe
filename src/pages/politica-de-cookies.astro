@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Política de Cookies | nutricionistaenleganes.com · Nutricionista Leganés"
+  description="Política de cookies del sitio web nutricionistaenleganes.com. Soraya Sánchez y José Luis Todolí, nutricionistas en Leganés."
+  canonical="/politica-de-cookies"
+>
+  <Nav slot="nav" />
+
+  <section class="section">
+    <div class="container legal-page">
+      <h1>Pol&iacute;tica de Cookies</h1>
+      <p class="legal-page__updated">Última actualización: febrero 2026</p>
+
+      <h2>1. ¿Qué son las cookies?</h2>
+      <p>Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo (ordenador, tablet o móvil) cuando visitas un sitio web. Se utilizan para que el sitio web funcione correctamente, mejorar tu experiencia de navegación y ofrecer información al propietario del sitio.</p>
+
+      <h2>2. Cookies propias</h2>
+      <p>Este sitio web utiliza las siguientes cookies propias:</p>
+
+      <div class="cookie-table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+              <th>Finalidad</th>
+              <th>Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>cookie_consent</code></td>
+              <td>Almacena tu preferencia sobre la aceptación de cookies. Es técnicamente necesaria.</td>
+              <td>365 días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>3. Cookies de terceros</h2>
+      <p>Este sitio web integra servicios de terceros que pueden establecer sus propias cookies en tu dispositivo:</p>
+
+      <h3>Vimeo (reproducción de vídeos)</h3>
+      <p>Utilizamos Vimeo para reproducir vídeos. Al cargar el reproductor, Vimeo puede instalar las siguientes cookies:</p>
+      <div class="cookie-table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+              <th>Proveedor</th>
+              <th>Finalidad</th>
+              <th>Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>__cf_bm</code></td>
+              <td>Cloudflare (Vimeo)</td>
+              <td>Protección contra bots y gestión del tráfico web.</td>
+              <td>30 minutos</td>
+            </tr>
+            <tr>
+              <td><code>_cfuvid</code></td>
+              <td>Cloudflare (Vimeo)</td>
+              <td>Identificador de sesión para la gestión de tráfico.</td>
+              <td>Sesión</td>
+            </tr>
+            <tr>
+              <td><code>vuid</code></td>
+              <td>Vimeo</td>
+              <td>Analítica de reproducciones de vídeo.</td>
+              <td>2 años</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Calendly (reserva de citas)</h3>
+      <p>Utilizamos Calendly para gestionar la reserva de citas. Al cargar el widget de reservas, Calendly puede instalar cookies de sesión necesarias para el funcionamiento del sistema de reservas.</p>
+
+      <h3>Google Fonts (tipografías)</h3>
+      <p>Utilizamos Google Fonts para cargar las tipografías del sitio web. Google puede recopilar datos técnicos (dirección IP, agente del navegador) al servir los archivos de fuentes, aunque no instala cookies directamente en tu dispositivo.</p>
+
+      <h3>Google Maps (mapa de ubicación)</h3>
+      <p>Incluimos un mapa de Google Maps para mostrar la ubicación de la consulta. Al cargar el mapa, Google puede instalar cookies relacionadas con sus servicios de mapas y analítica.</p>
+
+      <h2>4. Tipos de cookies según su finalidad</h2>
+      <ul class="legal-list">
+        <li><strong>Cookies técnicas (necesarias):</strong> Imprescindibles para el funcionamiento del sitio web. Incluyen la cookie de consentimiento y las cookies de sesión de Calendly. No requieren consentimiento.</li>
+        <li><strong>Cookies de rendimiento/analítica:</strong> Permiten medir y analizar el uso del sitio. En este caso, la cookie <code>vuid</code> de Vimeo recopila estadísticas de reproducciones de vídeo.</li>
+        <li><strong>Cookies de seguridad:</strong> Las cookies <code>__cf_bm</code> y <code>_cfuvid</code> de Cloudflare protegen los servicios contra tráfico malicioso.</li>
+      </ul>
+
+      <h2>5. ¿Cómo gestionar las cookies?</h2>
+      <p>Puedes configurar tu navegador para aceptar o rechazar las cookies. A continuación te indicamos cómo hacerlo en los navegadores más habituales:</p>
+      <ul class="legal-list">
+        <li><strong>Google Chrome:</strong> Configuración &gt; Privacidad y seguridad &gt; Cookies y otros datos de sitios.</li>
+        <li><strong>Mozilla Firefox:</strong> Opciones &gt; Privacidad y seguridad &gt; Cookies y datos del sitio.</li>
+        <li><strong>Safari:</strong> Preferencias &gt; Privacidad &gt; Cookies y datos de sitios web.</li>
+        <li><strong>Microsoft Edge:</strong> Configuración &gt; Privacidad, búsqueda y servicios &gt; Cookies.</li>
+      </ul>
+      <p>Si desactivas las cookies, es posible que algunas funcionalidades del sitio (como la reserva de citas con Calendly o la reproducción de vídeos) no funcionen correctamente.</p>
+
+      <h2>6. Más información</h2>
+      <p>Para más información sobre el tratamiento de tus datos, consulta nuestra <a href="/politica-de-privacidad">Política de Privacidad</a>.</p>
+      <p>Si tienes cualquier duda, puedes contactarnos en <a href="mailto:info@nutricionistaenleganes.com">info@nutricionistaenleganes.com</a>.</p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    max-width: 800px;
+  }
+
+  .legal-page h1 {
+    font-family: var(--font-display);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .legal-page__updated {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--mentaris-border);
+  }
+
+  .legal-page h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--mentaris-green-dark);
+  }
+
+  .legal-page h3 {
+    font-size: 1.05rem;
+    margin-top: var(--spacing-md);
+  }
+
+  .legal-page p {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .legal-page code {
+    background: var(--sand);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  .legal-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .legal-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .legal-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--mentaris-green);
+  }
+
+  /* Cookie table */
+  .cookie-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--mentaris-border);
+  }
+
+  .cookie-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .cookie-table th {
+    background: var(--sand);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+
+  .cookie-table td {
+    padding: 0.75rem 1rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--mentaris-border);
+  }
+
+  .cookie-table code {
+    background: var(--sand);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .cookie-table th,
+    .cookie-table td {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.82rem;
+    }
+  }
+</style>

@@ -1,0 +1,188 @@
+---
+// Cookie consent banner - RGPD/LSSI compliant
+---
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Aviso de cookies">
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__text">
+      Utilizamos cookies propias y de terceros para mejorar tu experiencia. Puedes consultar nuestra
+      <a href="/politica-de-cookies">Política de Cookies</a> y
+      <a href="/politica-de-privacidad">Política de Privacidad</a>.
+    </p>
+    <div class="cookie-banner__actions">
+      <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Aceptar</button>
+      <button class="cookie-banner__btn cookie-banner__btn--reject" id="cookieReject">Rechazar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCookieBanner() {
+    const banner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('cookieAccept');
+    const rejectBtn = document.getElementById('cookieReject');
+
+    if (!banner || !acceptBtn || !rejectBtn) return;
+
+    // Check if user has already made a choice
+    const consent = localStorage.getItem('cookie_consent');
+    if (consent) {
+      banner.style.display = 'none';
+      return;
+    }
+
+    // Show banner
+    banner.style.display = 'block';
+
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'accepted');
+      document.cookie = 'cookie_consent=accepted;path=/;max-age=31536000;SameSite=Lax';
+      banner.classList.add('cookie-banner--hiding');
+      setTimeout(() => { banner.style.display = 'none'; }, 300);
+    });
+
+    rejectBtn.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'rejected');
+      document.cookie = 'cookie_consent=rejected;path=/;max-age=31536000;SameSite=Lax';
+      banner.classList.add('cookie-banner--hiding');
+      setTimeout(() => { banner.style.display = 'none'; }, 300);
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieBanner);
+  } else {
+    initCookieBanner();
+  }
+</script>
+
+<style>
+  .cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--white);
+    border-top: 1px solid var(--sand-dark);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
+    padding: 16px 20px;
+    animation: cookieSlideUp 0.4s ease;
+  }
+
+  .cookie-banner--hiding {
+    animation: cookieSlideDown 0.3s ease forwards;
+  }
+
+  @keyframes cookieSlideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes cookieSlideDown {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 0; }
+  }
+
+  .cookie-banner__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .cookie-banner__text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin: 0;
+    flex: 1;
+  }
+
+  .cookie-banner__text a {
+    color: var(--green-dark);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .cookie-banner__text a:hover {
+    color: var(--text);
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .cookie-banner__btn {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .cookie-banner__btn--accept {
+    background: var(--green-dark);
+    color: var(--white);
+  }
+
+  .cookie-banner__btn--accept:hover {
+    background: #3D7A5E;
+  }
+
+  .cookie-banner__btn--reject {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--sand-dark);
+  }
+
+  .cookie-banner__btn--reject:hover {
+    border-color: var(--text-light);
+    background: var(--sand);
+  }
+
+  /* Mobile: stack vertically */
+  @media (max-width: 600px) {
+    .cookie-banner {
+      padding: 16px;
+    }
+
+    .cookie-banner__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .cookie-banner__text {
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    .cookie-banner__actions {
+      justify-content: center;
+    }
+
+    .cookie-banner__btn {
+      padding: 10px 18px;
+      font-size: 0.82rem;
+    }
+  }
+
+  /* Push above mobile bottom bar */
+  @media (max-width: 900px) {
+    .cookie-banner {
+      bottom: 66px;
+    }
+  }
+</style>

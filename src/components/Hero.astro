@@ -1,0 +1,331 @@
+---
+import VideoEmbed from './VideoEmbed.astro';
+
+interface Props {
+  name?: string;
+  role?: string;
+  title?: string;
+  location?: string;
+  description?: string;
+  showVideo?: boolean;
+  benefits?: Array<{ emoji: string; text: string }>;
+}
+
+const {
+  name,
+  role,
+  title,
+  location = "Leganés",
+  description = "",
+  showVideo = false,
+  benefits = []
+} = Astro.props;
+
+const isHomepage = !title && (name || role);
+const displayName = name || "Nutricionista en Leganés";
+const displayRole = role || "Soraya Sánchez & José Luis Todolí";
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero__grid">
+      <div class="hero__content">
+        <div class="hero__avatar-wrap">
+          <img class="hero__avatar" src="/soraya-sanchez.webp" alt="Soraya Sánchez — Nutricionista en Leganés" width="56" height="56" fetchpriority="high" />
+          <img class="hero__avatar hero__avatar--second" src="/jose-luis-todoli.webp" alt="José Luis Todolí — Nutricionista en Leganés" width="56" height="56" fetchpriority="high" />
+        </div>
+
+        <p class="hero__location">{location}</p>
+
+        <h1 class="hero__title">
+          {isHomepage ? (
+            <>{displayName} <span class="hero__sep">|</span> {displayRole}</>
+          ) : (
+            title
+          )}
+        </h1>
+
+        <div class="hero__actions">
+          <a href="/#proceso" class="hero__pill">Proceso</a>
+          <a href="/#precios" class="hero__pill">Precios</a>
+          <a href="#reservar" class="hero__pill hero__pill--gold">Reserva cita</a>
+          <a href="https://wa.me/34644985209" class="hero__pill hero__pill--wa" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+
+        {description && <p class="hero__desc">{description}</p>}
+      </div>
+
+      {showVideo && (
+        <div class="hero__media">
+          <VideoEmbed vertical={true} />
+        </div>
+      )}
+    </div>
+
+    {benefits && benefits.length > 0 && (
+      <div class="hero__benefits">
+        {benefits.map(item => (
+          <div class="hero__benefit">
+            <span class="hero__benefit-icon">{item.emoji}</span>
+            <span class="hero__benefit-label">{item.text}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 64px 0 48px;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero__grid {
+      grid-template-columns: 7fr 3fr;
+      gap: 48px;
+    }
+  }
+
+  .hero__content {
+    max-width: 660px;
+  }
+
+  .hero__avatar-wrap {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  .hero__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--sand);
+    border: 3px solid var(--gold-light);
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero__avatar--second {
+    margin-left: -14px;
+  }
+
+  .hero__location {
+    font-family: var(--font-body);
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: 2em;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__sep {
+    color: #ccc;
+    font-weight: 300;
+  }
+
+  @media (min-width: 768px) {
+    .hero__title {
+      font-size: 2.5em;
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 10px 24px;
+    border: 2px solid var(--gold-light);
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.88em;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    background: var(--gold-light);
+    transition: all 0.2s;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .hero__pill:hover {
+    background: var(--gold);
+    color: var(--white);
+    border-color: var(--gold);
+    text-decoration: none;
+  }
+
+  .hero__pill--gold {
+    background: #946B1D;
+    color: var(--white);
+    border-color: #946B1D;
+  }
+
+  .hero__pill--gold:hover {
+    background: #7A5816;
+    border-color: #7A5816;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .hero__pill--wa {
+    color: #1A7A3A;
+    border-color: #c8e6d0;
+    background: transparent;
+  }
+
+  .hero__pill--wa:hover {
+    border-color: #1A7A3A;
+    background: #f0fdf4;
+    color: #1A7A3A;
+    text-decoration: none;
+  }
+
+  .hero__desc {
+    font-family: var(--font-body);
+    font-size: 0.95em;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 0;
+  }
+
+  .hero__media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--sand-dark);
+  }
+
+  .hero__benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .hero__benefit-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .hero__benefit-label {
+    font-family: var(--font-body);
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      padding: 24px 0 20px;
+      text-align: center;
+    }
+
+    .hero__grid {
+      gap: 20px;
+    }
+
+    .hero__title {
+      font-size: 1.6em;
+      line-height: 1.25;
+    }
+
+    .hero__location {
+      font-size: 1em;
+      margin-bottom: 12px;
+    }
+
+    .hero__avatar-wrap {
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .hero__avatar {
+      width: 48px;
+      height: 48px;
+    }
+
+    .hero__actions {
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .hero__pill {
+      padding: 10px 20px;
+      font-size: 0.9em;
+    }
+
+    .hero__desc {
+      font-size: 0.98em;
+      line-height: 1.7;
+    }
+
+    .hero__media {
+      justify-content: center;
+    }
+
+    .hero__benefits {
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .hero__benefit-label {
+      font-size: 0.92em;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero__title {
+      font-size: 1.4em;
+    }
+
+    .hero__location {
+      font-size: 0.92em;
+    }
+
+    .hero__pill {
+      padding: 9px 16px;
+      font-size: 0.85em;
+    }
+
+    .hero__desc {
+      font-size: 0.92em;
+    }
+  }
+</style>
