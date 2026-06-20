@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://nutricionista.io/nutricionista-getafe",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
