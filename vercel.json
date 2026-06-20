@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "destination": "https://nutricionista.io/nutricionista-getafe",
+      "destination": "https://nutricionista.io/nutricionista-en-getafe",
       "statusCode": 301
     }
   ],
